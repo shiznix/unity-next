@@ -1,0 +1,33 @@
+diff -urN mir-9999/src/default_server_configuration.cpp mir-9999-patched/src/default_server_configuration.cpp
+--- mir-9999/src/default_server_configuration.cpp	2013-03-12 15:22:34.960926014 +1030
++++ mir-9999-patched/src/default_server_configuration.cpp	2013-03-12 14:39:01.671954071 +1030
+@@ -16,6 +16,7 @@
+  * Authored by: Alan Griffiths <alan@octopull.co.uk>
+  */
+ 
++#include <iostream>
+ #include "mir/default_server_configuration.h"
+ 
+ #include "mir/options/program_option.h"
+diff -urN mir-9999/src/frontend/protobuf_message_processor.cpp mir-9999-patched/src/frontend/protobuf_message_processor.cpp
+--- mir-9999/src/frontend/protobuf_message_processor.cpp	2013-03-12 15:22:34.983926015 +1030
++++ mir-9999-patched/src/frontend/protobuf_message_processor.cpp	2013-03-12 14:36:01.630945358 +1030
+@@ -21,6 +21,7 @@
+ 
+ #include <boost/exception/diagnostic_information.hpp>
+ 
++#include <iostream>
+ #include <sstream>
+ 
+ namespace mfd = mir::frontend::detail;
+diff -urN mir-9999/src/frontend/socket_session.cpp mir-9999-patched/src/frontend/socket_session.cpp
+--- mir-9999/src/frontend/socket_session.cpp	2013-03-12 15:22:34.984926015 +1030
++++ mir-9999-patched/src/frontend/socket_session.cpp	2013-03-12 14:38:19.631952036 +1030
+@@ -20,6 +20,7 @@
+ 
+ #include "ancillary.h"
+ 
++#include <iostream>
+ #include <boost/signals2.hpp>
+ 
+ namespace ba = boost::asio;
