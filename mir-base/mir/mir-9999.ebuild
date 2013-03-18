@@ -23,6 +23,9 @@ src_prepare() {
 	sed -e 's/-Werror//g' \
 		-i CMakeLists.txt
 
+	# Use default gcc version #
+	epatch "${FILESDIR}/use_default_gcc.patch"
+
 	# Fix missing iostream includes #
 	epatch "${FILESDIR}/iostream_include_fix.diff"
 }
