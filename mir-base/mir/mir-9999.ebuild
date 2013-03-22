@@ -19,15 +19,15 @@ DEPEND="dev-libs/boost
 	x11-libs/libdrm"
 
 src_prepare() {
-	# Disable '-Werror'
+	# Disable '-Werror' #
 	sed -e 's/-Werror//g' \
 		-i CMakeLists.txt
 
-	# Use default gcc version #
-	epatch "${FILESDIR}/use_default_gcc.patch"
-
 	# Fix missing iostream includes #
 	epatch "${FILESDIR}/iostream_include_fix.diff"
+
+	# Unset CMAKE_BUILD_TYPE env variable so that cmake-utils.eclass doesn't try to 'append-cppflags -DNDEBUG' #
+	export CMAKE_BUILD_TYPE=none
 }
 
 src_install() {
