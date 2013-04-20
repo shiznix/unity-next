@@ -14,9 +14,19 @@ LICENSE="GPL-3 LGPL-3 MIT"
 SLOT="0"
 KEYWORDS=""
 
-DEPEND="dev-libs/boost
+DEPEND="dev-cpp/gflags
+	dev-cpp/glog
+	dev-libs/boost
 	media-libs/mesa[egl,gbm,gles2,mir]
-	x11-libs/libdrm"
+	sys-devel/gcc:4.7
+	x11-libs/libdrm
+	x11-libs/libxkbcommon"
+
+pkg_pretend() {
+	if [[ ( $(gcc-major-version) -eq 4 && $(gcc-minor-version) -ne 7 ) ]]; then
+		die "${P} requires an active gcc:4.7, please consult the output of 'gcc-config -l'"
+	fi
+}
 
 src_prepare() {
 	# Disable '-Werror' #
@@ -30,8 +40,15 @@ src_prepare() {
 	export CMAKE_BUILD_TYPE=none
 }
 
+src_configure() {
+	# Disable gtest discovery tests as does not work #
+	#   cmake/src/mir/mir_discover_gtest_tests.cpp:89: std::string {anonymous}::elide_string_left(const string&, std::size_t): Assertion `max_size >= 3' failed #
+	local mycmakeargs="${mycmakeargs}
+		-DDISABLE_GTEST_TEST_DISCOVERY=ON"
+	cmake-utils_src_configure
+}
+
 src_install() {
 	cmake-utils_src_install
-
-	dodoc HACKING.md README.md COPYING
+	dodoc HACKING.md README.md COPYING.GPL COPYING.LGPL
 }
