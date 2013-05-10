@@ -17,6 +17,7 @@ KEYWORDS=""
 DEPEND="dev-cpp/gflags
 	dev-cpp/glog
 	dev-libs/boost
+	media-libs/glm
 	media-libs/mesa[egl,gbm,gles2,mir]
 	sys-devel/gcc:4.7
 	x11-libs/libdrm
@@ -33,9 +34,6 @@ src_prepare() {
 	sed -e 's/-Werror//g' \
 		-i CMakeLists.txt
 
-	# Fix missing iostream includes #
-	epatch "${FILESDIR}/iostream_include_fix.diff"
-
 	# Unset CMAKE_BUILD_TYPE env variable so that cmake-utils.eclass doesn't try to 'append-cppflags -DNDEBUG' #
 	export CMAKE_BUILD_TYPE=none
 }
@@ -51,4 +49,10 @@ src_configure() {
 src_install() {
 	cmake-utils_src_install
 	dodoc HACKING.md README.md COPYING.GPL COPYING.LGPL
+}
+
+pkg_postinst() {
+	elog
+	elog "Read /usr/share/doc/${P}/HACKING.md.bz2 for how to run the MIR display server"
+	elog
 }
