@@ -1,7 +1,6 @@
 EAPI=4
-PYTHON_DEPEND="2:2.7 3:3.2"
 
-inherit python cmake-utils bzr ubuntu-versionator	# bzr must inherit after cmake-utils
+inherit cmake-utils bzr ubuntu-versionator	# bzr must inherit after cmake-utils
 
 DESCRIPTION="Mir is a display server technology"
 HOMEPAGE="https://launchpad.net/mir/"
@@ -13,19 +12,24 @@ SRC_URI=""
 LICENSE="GPL-3 LGPL-3 MIT"
 SLOT="0"
 KEYWORDS=""
+IUSE="test"
 
 DEPEND="dev-cpp/gflags
 	dev-cpp/glog
 	dev-libs/boost
+	>=dev-util/lttng-tools-2.1.1[ust]
 	media-libs/glm
 	media-libs/mesa[egl,gbm,gles2,mir]
-	sys-devel/gcc:4.7
+	>=sys-devel/gcc-4.7.3
 	x11-libs/libdrm
-	x11-libs/libxkbcommon"
+	x11-libs/libxkbcommon
+	test? ( dev-cpp/gtest )"
 
 pkg_pretend() {
-	if [[ ( $(gcc-major-version) -eq 4 && $(gcc-minor-version) -ne 7 ) ]]; then
-		die "${P} requires an active gcc:4.7, please consult the output of 'gcc-config -l'"
+	if [[ $(gcc-major-version) -lt 4 ]] || \
+		( [[ $(gcc-major-version) -eq 4 && $(gcc-minor-version) -lt 7 ]] ) || \
+			( [[ $(gcc-version) == "4.7" && $(gcc-micro-version) -lt 3 ]] ); then
+				die "${P} requires an active >=gcc-4.7.3, please consult the output of 'gcc-config -l'"
 	fi
 }
 
