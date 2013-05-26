@@ -1,0 +1,16 @@
+app-accessibility/pocketsphinx
+app-accessibility/sphinxbase
+dev-libs/dee **
+dev-libs/libunity **
+dev-libs/userspace-rcu
+dev-libs/xpathselect
+dev-util/lttng-tools
+dev-util/lttng-ust
+media-libs/glm
+mir-base/mir **
+unity-base/hud **
+unity-base/nux **
+unity-base/phablet **
+unity-base/unity **
+unity-lenses/unity-lens-people **
+x11-libs/qmenumodel **
