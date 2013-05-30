@@ -1,16 +1,13 @@
 app-accessibility/pocketsphinx
 app-accessibility/sphinxbase
-dev-libs/dee **
-dev-libs/libunity **
 dev-libs/userspace-rcu
-dev-libs/xpathselect
+dev-libs/libunity-preview **
 dev-util/lttng-tools
 dev-util/lttng-ust
 media-libs/glm
 mir-base/mir **
-unity-base/hud **
-unity-base/nux **
-unity-base/phablet **
-unity-base/unity **
-unity-lenses/unity-lens-people **
+unity-base/hud-preview **
+unity-lenses/unity-lens-people-preview **
 x11-libs/qmenumodel **
+unity-base/phablet-preview **
+unity-base/unity-preview **
