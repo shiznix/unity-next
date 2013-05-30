@@ -56,7 +56,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local PKG_CONFIG_PATH="/opt/phablet-preview/lib/pkgconfig:/opt/phablet-preview/$(get_libdir)/pkgconfig:$PKG_CONFIG_PATH"
+	local PKG_CONFIG_PATH="/opt/phablet-preview/$(get_libdir)/pkgconfig:$PKG_CONFIG_PATH"
 	local mycmakeargs="${mycmakeargs}
 				-DCMAKE_BUILD_TYPE=debug
 				-DCMAKE_INSTALL_PREFIX="/opt/phablet-preview"

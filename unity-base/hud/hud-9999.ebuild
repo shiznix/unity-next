@@ -22,7 +22,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE="test"
 
-RDEPEND="dev-libs/libdbusmenu:=
+RDEPEND="dev-libs/libdbusmenu:=[test]
 	unity-base/bamf:="
 DEPEND="${RDEPEND}
 	app-accessibility/pocketsphinx
@@ -45,9 +45,7 @@ src_prepare() {
 }
 
 src_configure() {
-	# Disable tests for now, needs dbusmenu-jsonloader-0.4.pc packaging #
 	local mycmakeargs="${mycmakeargs}
-			-DENABLE_TESTS=OFF
 			-DVALA_COMPILER=$(type -P valac-0.20)
 			-DVAPI_GEN=$(type -P vapigen-0.20)"
 	cmake-utils_src_configure
