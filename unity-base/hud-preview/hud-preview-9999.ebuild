@@ -22,7 +22,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE="test"
 
-RDEPEND="dev-libs/libdbusmenu:=[test]
+RDEPEND="dev-libs/libdbusmenu:=
 	unity-base/bamf:="
 DEPEND="${RDEPEND}
 	app-accessibility/pocketsphinx
