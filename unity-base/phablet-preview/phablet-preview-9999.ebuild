@@ -21,7 +21,9 @@ KEYWORDS=""
 IUSE="doc test"
 
 RDEPEND="x11-libs/qmenumodel
-	=unity-lenses/unity-lens-people-preview-9999"
+	unity-indicators/indicators-client
+	unity-lenses/unity-lens-mock
+	unity-lenses/unity-lens-people-preview"
 DEPEND="${RDEPEND}
 	dev-cpp/gtest
 	dev-libs/boost

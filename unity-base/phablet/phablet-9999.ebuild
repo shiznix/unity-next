@@ -20,7 +20,11 @@ SLOT="0"
 KEYWORDS=""
 IUSE="doc test"
 
-RDEPEND="x11-libs/qmenumodel"
+RDEPEND="x11-libs/qmenumodel
+	unity-base/demo-assets
+	unity-indicators/indicators-client
+	unity-lenses/unity-lens-mock
+	unity-lenses/unity-lens-people"
 DEPEND="${RDEPEND}
 	dev-cpp/gtest
 	dev-libs/boost
@@ -34,6 +38,7 @@ DEPEND="${RDEPEND}
 	media-sound/pulseaudio
 	sys-devel/gettext
 	=unity-base/hud-9999
+	=unity-base/unity-9999
 	x11-libs/dee-qt[qt5]
 	x11-libs/libxcb
 	x11-themes/ubuntu-themes[phone]
