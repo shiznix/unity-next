@@ -14,6 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+ust"
+RESTRICT="mirror"
 
 DEPEND="dev-libs/userspace-rcu
 	dev-libs/popt

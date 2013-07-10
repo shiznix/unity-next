@@ -4,6 +4,7 @@ dev-libs/userspace-rcu
 dev-libs/libunity-preview **
 dev-util/lttng-tools
 dev-util/lttng-ust
+dev-util/umockdev
 media-libs/glm
 mir-base/mir **
 unity-base/hud-preview **

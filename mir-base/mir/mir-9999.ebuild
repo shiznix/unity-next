@@ -22,6 +22,7 @@ DEPEND="dev-cpp/gflags
 	dev-cpp/glog
 	dev-libs/boost
 	>=dev-util/lttng-tools-2.1.1[ust]
+	dev-util/umockdev
 	media-libs/glm
 	media-libs/mesa[egl,gbm,gles2,mir]
 	>=sys-devel/gcc-4.7.3

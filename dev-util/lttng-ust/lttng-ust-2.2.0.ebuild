@@ -15,6 +15,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="examples"
+RESTRICT="mirror"
 
 DEPEND="dev-libs/userspace-rcu"
 RDEPEND="${DEPEND}"
