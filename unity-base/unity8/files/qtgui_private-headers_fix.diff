@@ -1,0 +1,59 @@
+diff -urN unity8-7.83+13.10.20131016.2/CMakeLists.txt unity8-7.83+13.10.20131016.2-patched/CMakeLists.txt
+--- unity8-7.83+13.10.20131016.2/CMakeLists.txt	2013-11-07 08:36:59.888619594 +1030
++++ unity8-7.83+13.10.20131016.2-patched/CMakeLists.txt	2013-11-07 08:41:20.951121579 +1030
+@@ -64,10 +64,15 @@
+ 
+ pkg_check_modules(UNITY-MIR REQUIRED unity-mir)
+ 
++# Workaround broken QT5 cmake files failing to return an include path for private headers :-/
++LIST(GET Qt5Core_INCLUDE_DIRS 0 QtCoreDir0)
++    SET(Qt5Gui_PRIVATE_INCLUDE_DIR ${QtCoreDir0}/QtGui/${Qt5Core_VERSION_STRING}/QtGui)
++
+ include_directories(
+     ${CMAKE_CURRENT_BINARY_DIR}
+     ${CMAKE_CURRENT_SOURCE_DIR}
+     ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
++    ${Qt5Gui_PRIVATE_INCLUDE_DIR}
+     ${UNITY-MIR_INCLUDE_DIRS}
+     )
+ 
+diff -urN unity8-7.83+13.10.20131016.2/tests/mocks/Unity/Launcher/CMakeLists.txt unity8-7.83+13.10.20131016.2-patched/tests/mocks/Unity/Launcher/CMakeLists.txt
+--- unity8-7.83+13.10.20131016.2/tests/mocks/Unity/Launcher/CMakeLists.txt	2013-11-07 08:36:59.873619393 +1030
++++ unity8-7.83+13.10.20131016.2-patched/tests/mocks/Unity/Launcher/CMakeLists.txt	2013-11-07 08:39:40.069767616 +1030
+@@ -3,8 +3,13 @@
+ 
+ add_definitions(-DTOP_SRCDIR="${CMAKE_SOURCE_DIR}")
+ 
++# Workaround broken QT5 cmake files failing to return an include path for private headers :-/
++LIST(GET Qt5Core_INCLUDE_DIRS 0 QtCoreDir0)
++    SET(Qt5Core_PRIVATE_INCLUDE_DIR ${QtCoreDir0}/QtCore/${Qt5Core_VERSION_STRING}/QtCore)
++
+ include_directories(
+     ${CMAKE_CURRENT_SOURCE_DIR}
++    ${Qt5Core_PRIVATE_INCLUDE_DIR}
+ )
+ 
+ set(MockLauncherModel_SOURCES
+diff -urN unity8-7.83+13.10.20131016.2/tests/plugins/ListViewWithPageHeader/CMakeLists.txt unity8-7.83+13.10.20131016.2-patched/tests/plugins/ListViewWithPageHeader/CMakeLists.txt
+--- unity8-7.83+13.10.20131016.2/tests/plugins/ListViewWithPageHeader/CMakeLists.txt	2013-11-07 08:36:59.880619486 +1030
++++ unity8-7.83+13.10.20131016.2-patched/tests/plugins/ListViewWithPageHeader/CMakeLists.txt	2013-11-07 08:40:33.589485826 +1030
+@@ -7,11 +7,19 @@
+     SET(Qt5V8_PRIVATE_INCLUDE_DIR ${QtCoreDir0}/QtV8/${Qt5Core_VERSION_STRING}/QtV8)
+ endif()
+ 
++# Workaround broken QT5 cmake files failing to return an include path for private headers :-/
++LIST(GET Qt5Core_INCLUDE_DIRS 0 QtCoreDir0)
++    SET(Qt5Core_PRIVATE_INCLUDE_DIR ${QtCoreDir0}/QtCore/${Qt5Core_VERSION_STRING}/QtCore)
++    SET(Qt5Qml_PRIVATE_INCLUDE_DIR ${QtCoreDir0}/QtQml/${Qt5Core_VERSION_STRING}/QtQml)
++    SET(Qt5Quick_PRIVATE_INCLUDE_DIR ${QtCoreDir0}/QtQuick/${Qt5Core_VERSION_STRING}/QtQuick)
+ 
+ include_directories(
++    ${Qt5Core_PRIVATE_INCLUDE_DIR}
+     ${Qt5Qml_PRIVATE_INCLUDE_DIRS}
++    ${Qt5Qml_PRIVATE_INCLUDE_DIR}
+     ${Qt5Quick_INCLUDE_DIRS}
+     ${Qt5Quick_PRIVATE_INCLUDE_DIRS}
++    ${Qt5Quick_PRIVATE_INCLUDE_DIR}
+     ${Qt5V8_PRIVATE_INCLUDE_DIR}
+     ${CMAKE_CURRENT_SOURCE_DIR}/../../../plugins/ListViewWithPageHeader
+     ${CMAKE_CURRENT_BINARY_DIR}

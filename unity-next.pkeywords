@@ -1,17 +1,14 @@
-app-accessibility/pocketsphinx
-app-accessibility/sphinxbase
-dev-libs/userspace-rcu
-dev-libs/libunity-preview **
-dev-util/lttng-tools
-dev-util/lttng-ust
-dev-util/umockdev
-media-libs/glm
-mir-base/mir **
-unity-base/hud-preview **
-unity-lenses/unity-lens-people-preview **
-x11-libs/qmenumodel **
-unity-base/phablet-preview **
-unity-base/unity-preview **
-unity-lenses/unity-lens-mock **
-unity-indicators/indicators-client **
-unity-base/demo-assets **
+app-misc/location-service
+dev-db/qdjango
+dev-libs/dbus-cpp
+dev-libs/libusermetrics
+dev-qt/qtscript
+mir-base/platform-api
+mir-base/unity-mir
+sys-libs/libapparmor
+unity-base/unity-api
+unity-base/unity8
+x11-libs/gsettings-qt
+x11-libs/qmenumodel
+x11-libs/libqtdbustest
+x11-libs/unity-notifications
