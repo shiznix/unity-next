@@ -21,7 +21,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="x11-libs/unity-notifications"
+RDEPEND="x11-themes/ubuntu-themes[phone]
+	x11-libs/unity-notifications"
 DEPEND="dev-libs/glib:2
 	dev-libs/libsigc++:2
 	dev-libs/libunity
@@ -62,4 +63,17 @@ src_prepare() {
 src_compile() {
 	addpredict $XDG_RUNTIME_DIR/dconf
 	cmake-utils_src_compile
+}
+
+src_install() {
+	cmake-utils_src_install
+
+	exeinto /usr/bin
+	doexe "${FILESDIR}/unity8_run.sh"
+}
+
+pkg_postinst() {
+	elog
+	elog "To run Unity8, open an xterm on your desktop and run '/usr/bin/unity8_run.sh'"
+	elog
 }
