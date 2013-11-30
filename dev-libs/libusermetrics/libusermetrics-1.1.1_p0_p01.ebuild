@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit cmake-utils ubuntu-versionator
+inherit cmake-utils gnome2-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/libu/${PN}"
 URELEASE="saucy"
@@ -31,3 +31,15 @@ DEPEND="dev-db/qdjango
 	x11-libs/libqtdbustest"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+
+pkg_preinst() {
+	gnome2_schemas_savelist
+}
+
+pkg_postinst() {
+	gnome2_schemas_update
+}
+
+pkg_postrm() {
+	gnome2_schemas_update
+}

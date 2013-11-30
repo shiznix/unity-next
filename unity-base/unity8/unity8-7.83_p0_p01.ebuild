@@ -21,6 +21,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
+RDEPEND="x11-libs/unity-notifications"
 DEPEND="dev-libs/glib:2
 	dev-libs/libsigc++:2
 	dev-libs/libunity
@@ -28,6 +29,7 @@ DEPEND="dev-libs/glib:2
 	dev-libs/libusermetrics
 	dev-perl/JSON
 	dev-python/setuptools
+	dev-qt/qt-mobility
 	dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5[xml]
 	dev-qt/qtjsbackend:5
@@ -48,14 +50,16 @@ DEPEND="dev-libs/glib:2
 	x11-libs/ubuntu-ui-toolkit"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
-export PATH="${PATH}:/usr/$(get_libdir)/qt5/bin"
+export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"
 
 src_prepare() {
-	# Workaround QT-5.2.0_beta1 cmake files for private headers #
-	epatch -p1 "${FILESDIR}/qtgui_private-headers_fix.diff"
-
 	sed -e 's:msg:MESSAGE:g' \
 		-i cmake/modules/{Plugins,QmlTest}.cmake
 	qt5-build_src_prepare
 	cmake-utils_src_prepare	
+}
+
+src_compile() {
+	addpredict $XDG_RUNTIME_DIR/dconf
+	cmake-utils_src_compile
 }

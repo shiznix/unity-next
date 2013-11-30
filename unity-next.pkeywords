@@ -2,6 +2,7 @@ app-misc/location-service
 dev-db/qdjango
 dev-libs/dbus-cpp
 dev-libs/libusermetrics
+dev-qt/qtfeedback
 dev-qt/qtscript
 mir-base/platform-api
 mir-base/unity-mir
