@@ -7,8 +7,8 @@ EAPI=5
 inherit cmake-utils gnome2-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/libu/${PN}"
-URELEASE="saucy"
-UVER_PREFIX="+13.10.20131003"
+URELEASE="trusty"
+UVER_PREFIX="+14.04.20131125"
 
 DESCRIPTION="Library for retrieving anonymous metrics about users"
 HOMEPAGE="http://launchpad.net/libusermetrics"

@@ -7,8 +7,8 @@ EAPI=5
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-URELEASE="saucy"
-UVER_PREFIX="+13.10.20131016"
+URELEASE="trusty"
+UVER_PREFIX="+14.04.20131030.1"
 
 DESCRIPTION="Server and client library for desktop notifications in Unity"
 HOMEPAGE="https://launchpad.net/qmenumodel"

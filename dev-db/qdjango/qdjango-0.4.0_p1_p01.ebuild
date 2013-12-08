@@ -7,7 +7,7 @@ EAPI=5
 inherit qt5-build ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/q/${PN}"
-URELEASE="saucy"
+URELEASE="trusty"
 
 DESCRIPTION="QML Bindings for GSettings"
 HOMEPAGE="https://launchpad.net/gsettings-qt"

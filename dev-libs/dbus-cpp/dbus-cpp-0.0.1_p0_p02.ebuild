@@ -7,7 +7,7 @@ EAPI=5
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/d/${PN}"
-URELEASE="saucy"
+URELEASE="trusty"
 UVER_PREFIX="+13.10.20130904"
 
 DESCRIPTION="Dbus-binding leveraging C++-11"

@@ -7,8 +7,8 @@ EAPI=5
 inherit qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/q/${PN}"
-URELEASE="saucy"
-UVER_PREFIX="+13.10.20131016"
+URELEASE="trusty"
+UVER_PREFIX="+14.04.20131125"
 
 DESCRIPTION="GMenuModel Qt bindings"
 HOMEPAGE="https://launchpad.net/qmenumodel"

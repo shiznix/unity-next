@@ -7,8 +7,8 @@ EAPI=5
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/libq/${PN}"
-URELEASE="saucy"
-UVER_PREFIX="+13.10.20130815"
+URELEASE="trusty"
+UVER_PREFIX="+14.04.20131128.1"
 
 DESCRIPTION="Library for testing DBus interactions using Qt"
 HOMEPAGE="https://launchpad.net/libqtdbustest"

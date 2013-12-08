@@ -7,7 +7,7 @@ EAPI=5
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/l/${PN}"
-URELEASE="saucy"
+URELEASE="trusty"
 UVER_PREFIX="+13.10.20131016.1"
 
 DESCRIPTION="Location service aggregating position/velocity/heading"

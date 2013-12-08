@@ -7,8 +7,8 @@ EAPI=5
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/p/${PN}"
-URELEASE="saucy"
-UVER_PREFIX="+13.10.20131015.1"
+URELEASE="trusty"
+UVER_PREFIX="+14.04.20131128.1"
 
 DESCRIPTION="Implementation of the Platform API for a Mir server"
 HOMEPAGE="https://launchpad.net/platform-api"

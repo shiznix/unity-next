@@ -7,8 +7,8 @@ EAPI=5
 inherit qt5-build ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-URELEASE="saucy"
-UVER_PREFIX="+13.10.20131016.1"
+URELEASE="trusty"
+UVER_PREFIX="+14.04.20131128.2"
 
 DESCRIPTION="Qt plugins for Unity specific Mir APIs"
 HOMEPAGE="https://launchpad.net/unity-mir"

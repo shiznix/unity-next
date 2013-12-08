@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python{2_7,3_2,3_3} )
 inherit qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-URELEASE="saucy"
-UVER_PREFIX="+13.10.20131016.2"
+URELEASE="trusty"
+UVER_PREFIX="+14.04.20131206.1"
 
 DESCRIPTION="Unity 8 desktop shell"
 HOMEPAGE="https://launchpad.net/unity8"
