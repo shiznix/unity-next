@@ -20,6 +20,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
+RDEPEND="dev-libs/boost:="
 DEPEND="app-misc/location-service
 	dev-libs/boost
 	dev-libs/dbus-cpp

@@ -21,8 +21,10 @@ IUSE=""
 RESTRICT="mirror"
 
 PDEPEND="mir-base/platform-api"
+RDEPEND="dev-libs/boost:="
 DEPEND="dev-cpp/gflags
 	dev-cpp/glog
+	dev-libs/boost
 	sys-apps/dbus"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
