@@ -9,7 +9,7 @@ inherit qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
 URELEASE="trusty"
-UVER_PREFIX="+14.04.20131206.1"
+UVER_PREFIX="+14.04.20131220"
 
 DESCRIPTION="Unity 8 desktop shell"
 HOMEPAGE="https://launchpad.net/unity8"

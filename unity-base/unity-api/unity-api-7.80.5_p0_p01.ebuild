@@ -8,7 +8,7 @@ inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
 URELEASE="trusty"
-UVER_PREFIX="+14.04.20131126.2"
+UVER_PREFIX="+14.04.20131219.1"
 
 DESCRIPTION="API for Unity shell integration"
 HOMEPAGE="https://launchpad.net/unity-api"
