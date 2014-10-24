@@ -1,0 +1,1 @@
+dev-libs/jsoncpp::gentoo	# Gentoo version doesn't install jsoncpp.pc pkgconfig file

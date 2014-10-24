@@ -4,11 +4,11 @@
 
 EAPI=5
 
+URELEASE="utopic"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/l/${PN}"
-URELEASE="trusty"
-UVER_PREFIX="+13.10.20131016.1"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Location service aggregating position/velocity/heading"
 HOMEPAGE="http://launchpad.net/location-service"
@@ -20,16 +20,24 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-PDEPEND="mir-base/platform-api"
 RDEPEND="dev-libs/boost:="
 DEPEND="dev-cpp/gflags
 	dev-cpp/glog
 	dev-libs/boost
+	dev-libs/dbus-cpp
+	dev-libs/json-c
+	dev-libs/net-cpp
+	dev-libs/process-cpp
+	dev-libs/properties-cpp
+	dev-libs/trust-store
 	sys-apps/dbus"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
 src_configure() {
+	# GPS is for the Android platform, so disable it #
+	mycmakeargs="${mycmakeargs}
+		-DLOCATION_SERVICE_ENABLE_GPS_PROVIDER=FALSE"
 	cmake-utils_src_configure
 
 	# Ubuntu's 'pkg-config --cflags ...' outputs Requires: first and Cflags: last #

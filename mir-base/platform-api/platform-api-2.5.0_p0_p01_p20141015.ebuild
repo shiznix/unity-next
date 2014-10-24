@@ -4,11 +4,11 @@
 
 EAPI=5
 
+URELEASE="utopic"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/p/${PN}"
-URELEASE="trusty"
-UVER_PREFIX="+14.04.20131128.1"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Implementation of the Platform API for a Mir server"
 HOMEPAGE="https://launchpad.net/platform-api"
@@ -31,11 +31,11 @@ DEPEND="app-misc/location-service
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
 src_prepare() {
-	# libubuntu_application_api.so will only be built if libhybris is installed #
-	# Libhybris is for android devices only so why does 'platform-api' hardcode this requirement ?! #
-	# Strip it for desktops #
-	sed -e 's:-lubuntu_application_api::g' \
-		-i data/ubuntu-platform-api.pc.in
+	# Strip/disable android related hybris support #
+	sed -e 's:add_subdirectory(touch)::g' \
+		-i src/ubuntu/application/CMakeLists.txt
+	sed -e 's:add_subdirectory(hardware)::g' \
+		-i src/ubuntu/CMakeLists.txt
 }
 
 src_configure() {
@@ -49,5 +49,5 @@ src_configure() {
 	#  Re-order to what the source expects #
 	sed -e 's:\(.*\)=\(.*dbus-cpp-0;\)\(.*\):\1=\3;\2:g' \
 		-e 's:;$::g' \
-			-i "${BUILD_DIR}"/CMakeCache.txt 
+			-i "${BUILD_DIR}"/CMakeCache.txt
 }

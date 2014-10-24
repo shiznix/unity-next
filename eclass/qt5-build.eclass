@@ -76,7 +76,7 @@ if [[ ${PN} != "qttest" ]]; then
 	fi
 fi
 
-EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install src_test pkg_postinst pkg_postrm
+EXPORT_FUNCTIONS pkg_setup src_unpack src_prepare src_configure src_compile src_install src_test pkg_postinst pkg_postrm
 
 # @ECLASS-VARIABLE: PATCHES
 # @DEFAULT_UNSET
@@ -102,7 +102,7 @@ EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install sr
 # @ECLASS-VARIABLE: QT5_BUILD_DIR
 # @DESCRIPTION:
 # Build directory for out-of-source builds.
-: ${QT5_BUILD_DIR:=${S}_build}
+: ${QT5_BUILD_DIR:=${S}}
 
 # @ECLASS-VARIABLE: QT5_VERBOSE_BUILD
 # @DESCRIPTION:
@@ -123,6 +123,11 @@ EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install sr
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # Array of macros that must be defined in QtCore/qconfig.h
+
+# @FUNCTION: qt5-build_pkg_setup
+qt5-build_pkg_setup() {
+	:
+}
 
 # @FUNCTION: qt5-build_src_unpack
 # @DESCRIPTION:
@@ -364,8 +369,12 @@ qt5_prepare_env() {
 	QT5_TESTSDIR=${QT5_DATADIR}/tests
 	QT5_SYSCONFDIR=${EPREFIX}/etc/qt5
 
-	# see mkspecs/features/qt_config.prf
-	export QMAKEMODULES="${QT5_BUILD_DIR}/mkspecs/modules:${S}/mkspecs/modules:${QT5_ARCHDATADIR}/mkspecs/modules"
+	if [[ ${QT5_MODULE} == "qtbase" ]]; then
+		# see mkspecs/features/qt_config.prf
+		# note: this could be the cause of bug 451456, so do it
+		#       only when really needed, i.e. for qtbase modules
+		export QMAKEMODULES="${QT5_BUILD_DIR}/mkspecs/modules:${S}/mkspecs/modules:${QT5_ARCHDATADIR}/mkspecs/modules"
+	fi
 }
 
 # @FUNCTION: qt5_symlink_tools_to_buildtree

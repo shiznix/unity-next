@@ -4,11 +4,11 @@
 
 EAPI=5
 
-inherit qt5-build ubuntu-versionator
+URELEASE="trusty"
+inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-URELEASE="trusty"
-UVER_PREFIX="+14.04.20131209"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Qt plugins for Unity specific Mir APIs"
 HOMEPAGE="https://launchpad.net/unity-mir"
@@ -37,5 +37,5 @@ S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
 src_prepare() {
 	epatch -p1 "${WORKDIR}/${MY_P}${UVER_PREFIX}-${UVER}.diff"	# This needs to be applied for the debian/ directory to be present #
-	qt5-build_src_prepare
+	cmake-utils_src_prepare
 }

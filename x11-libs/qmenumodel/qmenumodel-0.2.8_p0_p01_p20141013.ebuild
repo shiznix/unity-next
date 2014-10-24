@@ -4,11 +4,11 @@
 
 EAPI=5
 
+URELEASE="utopic"
 inherit qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/q/${PN}"
-URELEASE="trusty"
-UVER_PREFIX="+14.04.20131213"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="GMenuModel Qt bindings"
 HOMEPAGE="https://launchpad.net/qmenumodel"

@@ -1,10 +1,16 @@
 app-misc/location-service
 dev-db/qdjango
 dev-libs/dbus-cpp
+dev-libs/jsoncpp
 dev-libs/libusermetrics
+dev-libs/net-cpp
+dev-libs/process-cpp
+dev-libs/trust-store
 dev-qt/qtfeedback
 dev-qt/qtscript
+dev-util/cmake-extras
 mir-base/platform-api
+mir-base/platform-api-headers
 mir-base/unity-mir
 sys-libs/libapparmor
 unity-base/unity-api

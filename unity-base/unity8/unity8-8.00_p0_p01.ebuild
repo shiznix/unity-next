@@ -5,11 +5,12 @@
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_2,3_3} )
 
+URELEASE="utopic"
 inherit qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-URELEASE="trusty"
-UVER_PREFIX="+14.04.20131220"
+#UVER_PREFIX="+${UVER_RELEASE}.20140918.3"
+UVER_PREFIX="+14.10.20141013.2"
 
 DESCRIPTION="Unity 8 desktop shell"
 HOMEPAGE="https://launchpad.net/unity8"
@@ -24,6 +25,7 @@ RESTRICT="mirror"
 RDEPEND="x11-themes/ubuntu-themes[phone]
 	x11-libs/unity-notifications"
 DEPEND="dev-libs/glib:2
+	dev-libs/libhybris
 	dev-libs/libsigc++:2
 	dev-libs/libunity
 	dev-libs/libupstart
@@ -33,14 +35,13 @@ DEPEND="dev-libs/glib:2
 	dev-qt/qt-mobility
 	dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5[xml]
-	dev-qt/qtjsbackend:5
 	dev-qt/qtxmlpatterns:5
+	dev-util/android-headers
 	dev-util/dbus-test-runner
 	dev-util/pkgconfig
 	media-fonts/ubuntu-font-family
 	media-libs/mesa
 	media-sound/pulseaudio
-	mir-base/unity-mir
 	sys-libs/libnih
 	unity-base/hud
 	unity-base/unity-api
@@ -57,7 +58,7 @@ src_prepare() {
 	sed -e 's:msg:MESSAGE:g' \
 		-i cmake/modules/{Plugins,QmlTest}.cmake
 	qt5-build_src_prepare
-	cmake-utils_src_prepare	
+	cmake-utils_src_prepare
 }
 
 src_compile() {

@@ -4,11 +4,11 @@
 
 EAPI=5
 
+URELEASE="utopic"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-URELEASE="trusty"
-UVER_PREFIX="+14.04.20131030.1"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Server and client library for desktop notifications in Unity"
 HOMEPAGE="https://launchpad.net/qmenumodel"

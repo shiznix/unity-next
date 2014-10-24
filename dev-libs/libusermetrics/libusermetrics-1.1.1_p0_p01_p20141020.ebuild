@@ -4,11 +4,11 @@
 
 EAPI=5
 
+URELEASE="utopic"
 inherit cmake-utils gnome2-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/libu/${PN}"
-URELEASE="trusty"
-UVER_PREFIX="+14.04.20131125"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Library for retrieving anonymous metrics about users"
 HOMEPAGE="http://launchpad.net/libusermetrics"
@@ -21,14 +21,15 @@ IUSE=""
 RESTRICT="mirror"
 
 DEPEND="dev-db/qdjango
+	dev-libs/libqtdbustest
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
 	dev-qt/qtsql:5[sqlite]
 	dev-qt/qtxmlpatterns:5
+	dev-util/cmake-extras
 	sys-libs/libapparmor
-	x11-libs/gsettings-qt
-	x11-libs/libqtdbustest"
+	x11-libs/gsettings-qt"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
