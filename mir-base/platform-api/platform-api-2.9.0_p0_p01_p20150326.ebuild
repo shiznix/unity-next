@@ -4,10 +4,10 @@
 
 EAPI=5
 
-URELEASE="utopic"
+URELEASE="vivid"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/main/p/${PN}"
+UURL="mirror://ubuntu/pool/universe/p/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Implementation of the Platform API for a Mir server"

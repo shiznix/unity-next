@@ -4,10 +4,10 @@
 
 EAPI=5
 
-URELEASE="utopic"
+URELEASE="vivid"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/main/l/${PN}"
+UURL="mirror://ubuntu/pool/universe/l/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Location service aggregating position/velocity/heading"

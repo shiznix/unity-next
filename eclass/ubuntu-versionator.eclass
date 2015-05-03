@@ -19,14 +19,11 @@
 # If this occurs, the ebuild should be named package-3.6.0a_p0_p02
 
 
+inherit toolchain-funcs
 EXPORT_FUNCTIONS pkg_setup pkg_postinst
 
 #---------------------------------------------------------------------------------------------------------------------------------#
 ### GLOBAL ECLASS INHERIT DEFAULTS ##
-
-## distutils-r1.eclass ##
-# Set this to catch future parallel build problems, parallel builds give us no real benefit for our tiny python packages #
-export DISTUTILS_NO_PARALLEL_BUILD=1
 
 ## vala.eclass ##
 # Set base sane vala version for all packages requiring vala, override in ebuild if or when specific higher versions are needed #
@@ -35,9 +32,9 @@ export VALA_MAX_API_VERSION=${VALA_MAX_API_VERSION:=0.20}
 export VALA_USE_DEPEND="vapigen"
 #---------------------------------------------------------------------------------------------------------------------------------#
 
-
 [[ "${URELEASE}" == *trusty* ]] && UVER_RELEASE="14.04"
 [[ "${URELEASE}" == *utopic* ]] && UVER_RELEASE="14.10"
+[[ "${URELEASE}" == *vivid* ]] && UVER_RELEASE="15.04"
 
 
 PV="${PV%%[a-z]_p*}"	# For package-3.6.0a_p0_p02
@@ -52,36 +49,55 @@ OIFS="${IFS}"
 IFS=p; read -ra PVR_ARRAY <<< "${PVR}"
 IFS="${OIFS}"
 
+## Major version field ##
 PVR_PL_MAJOR="${PVR_ARRAY[1]}"
-PVR_PL_MAJOR="${PVR_PL_MAJOR%*_}"	# Major
+PVR_PL_MAJOR="${PVR_PL_MAJOR%*_}"
 
-PVR_PL="${PVR_ARRAY[2]}"
-PVR_PL="${PVR_PL%*_}"			# Minor
-PVR_PL="${PVR_PL%%-r*}"		# Strip revision strings
-
-PVR_MICRO="${PVR_ARRAY[3]}"
-PVR_MICRO="${PVR_MICRO%*_}"		# Micro
-PVR_MICRO="${PVR_MICRO%%-r*}"	# Strip revision strings
-
-char=2
-index=1
-strlength="${#PVR_PL}"
-while [ "${PVR_PL}" != "" ]; do
-	strtmp="${PVR_PL:0:$char}"
-	if [ "${strlength}" -ge 6 ]; then	# Don't strip zeros from 3rd number field, this is the Ubuntu OS release #
-		if [ "${index}" != 3 ]; then
+## Minor version field ##
+PVR_PL_MINOR="${PVR_ARRAY[2]}"
+PVR_PL_MINOR="${PVR_PL_MINOR%*_}"
+PVR_PL_MINOR="${PVR_PL_MINOR%%-r*}"	# Strip revision strings
+	char=2
+	index=1
+	strlength="${#PVR_PL_MINOR}"
+	while [ "${PVR_PL_MINOR}" != "" ]; do
+		strtmp="${PVR_PL_MINOR:0:$char}"
+		if [ "${strlength}" -ge 6 ]; then	# Don't strip zeros from 3rd number field, this is the Ubuntu OS release #
+			if [ "${index}" != 3 ]; then
+				strtmp="${strtmp#0}"
+			fi
+		else
 			strtmp="${strtmp#0}"
 		fi
-	else
-		strtmp="${strtmp#0}"
-	fi
-	strarray+=( "${strtmp}" )
-	PVR_PL="${PVR_PL:$char}"
-	((index++))
-done
+		strarray+=( "${strtmp}" )
+		PVR_PL_MINOR="${PVR_PL_MINOR:$char}"
+		((index++))
+	done
+PVR_PL_MINOR_tmp="${strarray[@]}"
+PVR_PL_MINOR="${PVR_PL_MINOR_tmp// /.}"
 
-PVR_PL_MINOR="${strarray[@]}"
-PVR_PL_MINOR="${PVR_PL_MINOR// /.}"
+## Micro version field ##
+PVR_PL_MICRO="${PVR_ARRAY[3]}"
+PVR_PL_MICRO="${PVR_PL_MICRO%*_}"
+PVR_PL_MICRO="${PVR_PL_MICRO%%-r*}"	# Strip revision strings
+	[[ -n "${strarray[@]}" ]] && unset strarray[@]
+	char=2
+	index=1
+	strlength="${#PVR_PL_MICRO}"
+	while [ "${PVR_PL_MICRO}" != "" ]; do
+		strtmp="${PVR_PL_MICRO:0:$char}"
+		if [ "${strlength}" -ge 10 ]; then	# Last field can be a floating point so strip off leading zero and add decimal point #
+			if [ "${index}" = 5 ]; then
+				strtmp=".${strtmp#0}"
+			fi
+		fi
+		strarray+=( "${strtmp}" )
+		PVR_PL_MICRO="${PVR_PL_MICRO:$char}"
+		((index++))
+	done
+PVR_PL_MICRO_tmp="${strarray[@]}"
+PVR_MICRO="${PVR_PL_MICRO_tmp// /}"
+
 
 if [ "${PN}" = "ubuntu-sources" ]; then
 	UVER="${PVR_PL_MAJOR}.${PVR_PL_MINOR}"
@@ -114,6 +130,17 @@ ubuntu-versionator_pkg_setup() {
 			die "'${PROFILE_RELEASE}' profile detected, please run 'emerge unity-base/unity-build-env:0/${PROFILE_RELEASE}' to setup package masking"
                 export UNITY_BUILD_OK=1
         fi
+
+	# Minimum system-wide GCC version required #
+	[[ "${PROFILE_RELEASE}" == utopic ]] && GCC_MINIMUM="4.8"
+	[[ "${PROFILE_RELEASE}" == vivid ]] && GCC_MINIMUM="4.9"
+	GCC_MINIMUM_MAJOR="${GCC_MINIMUM%%.*}"
+	GCC_MINIMUM_MINOR="${GCC_MINIMUM##*.}"
+
+	if [[ $(gcc-major-version) -lt "${GCC_MINIMUM_MAJOR}" ]] || \
+		( [[ $(gcc-major-version) -eq "${GCC_MINIMUM_MAJOR}" && $(gcc-minor-version) -lt "${GCC_MINIMUM_MINOR}" ]] ); then
+			die "The selected '${PROFILE_RELEASE}' profile requires your system be built using >=sys-devel/gcc:${GCC_MINIMUM}, please consult the output of 'gcc-config -l'"
+	fi
 }
 
 # @FUNCTION: ubuntu-versionator_pkg_postinst

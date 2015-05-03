@@ -4,10 +4,10 @@
 
 EAPI=5
 
+URELEASE="vivid"
 inherit qt5-build ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/q/${PN}"
-URELEASE="trusty"
 
 DESCRIPTION="QML Bindings for GSettings"
 HOMEPAGE="https://launchpad.net/gsettings-qt"
@@ -26,7 +26,8 @@ DEPEND="dev-qt/qtcore:5
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 QT5_BUILD_DIR="${S}"
+export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"	# Need to see QT5's qmake
 
 src_configure() {
-	bin/qmake PREFIX=/usr
+	qmake PREFIX=/usr
 }

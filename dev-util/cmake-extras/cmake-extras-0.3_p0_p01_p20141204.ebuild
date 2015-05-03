@@ -4,7 +4,7 @@
 
 EAPI=5
 
-URELEASE="utopic"
+URELEASE="vivid"
 inherit ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/c/${PN}"

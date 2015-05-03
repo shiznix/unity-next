@@ -4,12 +4,11 @@
 
 EAPI=5
 
-URELEASE="utopic"
+URELEASE="vivid"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-#UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
-UVER_PREFIX="+14.10.20141003.1"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="API for Unity shell integration"
 HOMEPAGE="https://launchpad.net/unity-api"
@@ -23,7 +22,6 @@ RESTRICT="mirror"
 
 DEPEND="dev-libs/boost
 	dev-libs/glib:2
-	>=sys-devel/gcc-4.9
 	test? ( dev-util/cppcheck )"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"

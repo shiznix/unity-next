@@ -3,14 +3,13 @@
 # $Header: $
 
 EAPI=5
-PYTHON_COMPAT=( python{2_7,3_2,3_3} )
+PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 
-URELEASE="utopic"
+URELEASE="vivid"
 inherit qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-#UVER_PREFIX="+${UVER_RELEASE}.20140918.3"
-UVER_PREFIX="+14.10.20141013.2"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Unity 8 desktop shell"
 HOMEPAGE="https://launchpad.net/unity8"
@@ -22,9 +21,11 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="x11-themes/ubuntu-themes[phone]
+RDEPEND="net-misc/telephony-service
+	x11-themes/ubuntu-themes
 	x11-libs/unity-notifications"
-DEPEND="dev-libs/glib:2
+DEPEND="app-misc/pay-service
+	dev-libs/glib:2
 	dev-libs/libhybris
 	dev-libs/libsigc++:2
 	dev-libs/libunity
@@ -43,7 +44,9 @@ DEPEND="dev-libs/glib:2
 	media-libs/mesa
 	media-sound/pulseaudio
 	sys-libs/libnih
+	unity-base/connectivity-api
 	unity-base/hud
+	unity-base/ubuntu-system-settings
 	unity-base/unity-api
 	x11-libs/dee-qt
 	x11-libs/gsettings-qt
@@ -55,8 +58,8 @@ S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"
 
 src_prepare() {
-	sed -e 's:msg:MESSAGE:g' \
-		-i cmake/modules/{Plugins,QmlTest}.cmake
+#	sed -e 's:msg:MESSAGE:g' \
+#		-i cmake/modules/{Plugins,QmlTest}.cmake
 	qt5-build_src_prepare
 	cmake-utils_src_prepare
 }

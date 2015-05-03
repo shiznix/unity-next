@@ -4,24 +4,28 @@
 
 EAPI=5
 
-URELEASE="utopic"
+URELEASE="vivid"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/main/p/${PN}"
+UURL="mirror://ubuntu/pool/universe/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
-DESCRIPTION="C++11 library for handling processes"
-HOMEPAGE="http://launchpad.net/process-cpp"
+DESCRIPTION="Server and client library for desktop notifications in Unity"
+HOMEPAGE="https://launchpad.net/qmenumodel"
 SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 
-LICENSE="LGPL-3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="test"
 RESTRICT="mirror"
 
-RDEPEND="dev-libs/boost:="
-DEPEND="dev-libs/boost
-	dev-libs/properties-cpp"
+DEPEND="dev-libs/glib:2
+	dev-qt/qtcore:5
+	dev-qt/qtdbus:5
+	dev-qt/qtdeclarative:5
+	dev-qt/qtgui:5
+	dev-qt/qtnetwork:5
+	dev-qt/qtwidgets:5"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"

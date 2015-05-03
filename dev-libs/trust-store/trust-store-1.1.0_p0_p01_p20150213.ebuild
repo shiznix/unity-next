@@ -4,10 +4,10 @@
 
 EAPI=5
 
-URELEASE="utopic"
+URELEASE="vivid"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/main/t/${PN}"
+UURL="mirror://ubuntu/pool/universe/t/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="API for creating, reading, updating and deleting trust requests answered by users"
@@ -20,10 +20,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="dev-libs/boost:="
 DEPEND="dev-cpp/glog
 	dev-db/sqlite:3
-	dev-libs/boost
+	dev-libs/boost:=
 	dev-libs/dbus-cpp
 	dev-libs/process-cpp
 	dev-qt/qtcore:5
