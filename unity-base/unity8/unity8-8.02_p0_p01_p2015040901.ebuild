@@ -21,9 +21,10 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="net-misc/telephony-service
-	x11-themes/ubuntu-themes
-	x11-libs/unity-notifications"
+RDEPEND="unity-base/ubuntu-settings-components
+	x11-libs/unity-notifications
+	x11-misc/ubuntu-keyboard
+	x11-themes/ubuntu-themes"
 DEPEND="app-misc/pay-service
 	dev-libs/glib:2
 	dev-libs/libhybris
@@ -43,6 +44,7 @@ DEPEND="app-misc/pay-service
 	media-fonts/ubuntu-font-family
 	media-libs/mesa
 	media-sound/pulseaudio
+	net-misc/telephony-service
 	sys-libs/libnih
 	unity-base/connectivity-api
 	unity-base/hud
@@ -58,8 +60,6 @@ S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"
 
 src_prepare() {
-#	sed -e 's:msg:MESSAGE:g' \
-#		-i cmake/modules/{Plugins,QmlTest}.cmake
 	qt5-build_src_prepare
 	cmake-utils_src_prepare
 }
