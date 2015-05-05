@@ -26,10 +26,3 @@ DEPEND="dev-libs/boost
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 export PATH="${PATH}:/usr/$(get_libdir)/qt5/bin"
-
-pkg_setup() {
-	if [[ $(gcc-major-version) -lt 4 ]] || \
-		( [[ $(gcc-major-version) -eq 4 && $(gcc-minor-version) -lt 9 ]] ); then
-			die "${P} requires an active >=gcc-4.9, please consult the output of 'gcc-config -l'"
-	fi
-}

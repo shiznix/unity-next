@@ -24,10 +24,12 @@ net-misc/history-service
 net-misc/telephony-service
 sys-libs/libapparmor
 unity-base/connectivity-api
+unity-base/qtubuntu
 unity-base/ubuntu-settings-components
 unity-base/ubuntu-system-settings
 unity-base/unity-api
 unity-base/unity8
+unity-base/unity8-desktop-session
 x11-libs/gsettings-qt
 x11-libs/qmenumodel
 x11-libs/libqtdbustest

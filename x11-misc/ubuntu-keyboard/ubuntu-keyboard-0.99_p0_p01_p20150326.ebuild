@@ -18,7 +18,7 @@ SRC_URI="${UURL}/${MY_P}${UVER_SUFFIX}${UVER_PREFIX}.orig.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
+IUSE=""
 RESTRICT="mirror"
 
 DEPEND="app-i18n/libpinyin
