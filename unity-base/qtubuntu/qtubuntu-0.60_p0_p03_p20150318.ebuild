@@ -23,7 +23,7 @@ RESTRICT="mirror"
 DEPEND="dev-libs/glib:2
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
-	dev-qt/qtgui:5[egl,eglfs,evdev,gles2,opengl]
+	dev-qt/qtgui:5[egl,evdev,opengl]
 	dev-qt/qtsensors:5
 	media-libs/fontconfig
 	media-libs/freetype
