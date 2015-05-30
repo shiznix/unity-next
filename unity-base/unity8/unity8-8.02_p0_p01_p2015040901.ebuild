@@ -23,6 +23,7 @@ RESTRICT="mirror"
 
 RDEPEND="sys-auth/polkit-pkla-compat
 	unity-base/ubuntu-settings-components
+	unity-base/unity-scopes-shell
 	x11-libs/unity-notifications
 	x11-misc/ubuntu-keyboard
 	x11-themes/ubuntu-themes"
