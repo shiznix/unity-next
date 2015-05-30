@@ -2,6 +2,7 @@ app-i18n/maliit-framework
 app-text/presage
 app-misc/location-service
 app-misc/pay-service
+dev-cpp/capnproto
 dev-db/qdjango
 dev-libs/dbus-cpp
 dev-libs/jsoncpp
@@ -20,6 +21,8 @@ mir-base/unity-mir
 net-libs/libphonenumber
 net-libs/telepathy-qt
 net-libs/ubuntuone-credentials
+net-libs/zeromq3
+net-libs/zmqpp
 net-misc/history-service
 net-misc/telephony-service
 sys-libs/libapparmor
@@ -27,7 +30,10 @@ unity-base/connectivity-api
 unity-base/qtubuntu
 unity-base/ubuntu-settings-components
 unity-base/ubuntu-system-settings
+unity-base/ubuntu-system-settings-online-accounts
 unity-base/unity-api
+unity-base/unity-scopes-api
+unity-base/unity-scopes-shell
 unity-base/unity8
 unity-base/unity8-desktop-session
 x11-libs/gsettings-qt

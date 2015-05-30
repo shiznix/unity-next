@@ -20,7 +20,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="dev-libs/libusermetrics
+RDEPEND="sys-auth/polkit-pkla-compat"
+DEPEND="${RDEPEND}
+	dev-libs/libusermetrics
 	dev-qt/qtmultimedia:5
 	net-libs/libphonenumber
 	net-libs/telepathy-qt[qt5]
@@ -31,3 +33,9 @@ DEPEND="dev-libs/libusermetrics
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"	# Need to see QT5's qmake
+
+src_configure() {
+	local mycmakeargs="${mycmakeargs}
+		-DCMAKE_INSTALL_LOCALSTATEDIR=/var"
+	cmake-utils_src_configure
+}

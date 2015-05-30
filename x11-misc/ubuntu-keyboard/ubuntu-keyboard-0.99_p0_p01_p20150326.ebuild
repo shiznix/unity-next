@@ -8,12 +8,11 @@ URELEASE="vivid"
 inherit qt5-build gnome2-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
-UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
-UVER_SUFFIX=".trunk.phablet2"
+UVER_PREFIX=".trunk.phablet2+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Ubuntu on-screen keyboard data files"
 HOMEPAGE="https://launchpad.net/ubuntu-keyboard"
-SRC_URI="${UURL}/${MY_P}${UVER_SUFFIX}${UVER_PREFIX}.orig.tar.gz"
+SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

@@ -6,7 +6,7 @@ EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 
 URELEASE="vivid"
-inherit qt5-build cmake-utils ubuntu-versionator
+inherit gnome2-utils qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -21,11 +21,13 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="unity-base/ubuntu-settings-components
+RDEPEND="sys-auth/polkit-pkla-compat
+	unity-base/ubuntu-settings-components
 	x11-libs/unity-notifications
 	x11-misc/ubuntu-keyboard
 	x11-themes/ubuntu-themes"
-DEPEND="app-misc/pay-service
+DEPEND="${RDEPEND}
+	app-misc/pay-service
 	dev-libs/glib:2
 	dev-libs/libhybris
 	dev-libs/libsigc++:2
@@ -59,14 +61,20 @@ DEPEND="app-misc/pay-service
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"
 
+pkg_setup() {
+	ubuntu-versionator_pkg_setup
+	gnome2_environment_reset
+}
+
 src_prepare() {
 	qt5-build_src_prepare
 	cmake-utils_src_prepare
 }
 
-src_compile() {
-	addpredict $XDG_RUNTIME_DIR/dconf
-	cmake-utils_src_compile
+src_configure() {
+	local mycmakeargs="${mycmakeargs}
+		-DCMAKE_INSTALL_LOCALSTATEDIR=/var"
+	cmake-utils_src_configure
 }
 
 src_install() {
