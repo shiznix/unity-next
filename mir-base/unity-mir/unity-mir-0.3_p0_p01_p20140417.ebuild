@@ -21,8 +21,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="dev-libs/glib:2
-	dev-libs/libupstart-app-launch
+DEPEND="!dev-libs/libupstart-app-launch
+	dev-libs/glib:2
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtdeclarative:5
@@ -30,6 +30,7 @@ DEPEND="dev-libs/glib:2
 	dev-qt/qtnetwork:5
 	mir-base/mir
 	mir-base/platform-api
+	sys-apps/ubuntu-app-launch
 	unity-base/unity-api
 	x11-libs/dee-qt[qt5]"
 

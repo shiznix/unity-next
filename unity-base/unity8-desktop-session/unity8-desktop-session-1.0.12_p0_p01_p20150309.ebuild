@@ -20,10 +20,10 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="dev-libs/libubuntu-app-launch
-	mir-base/qtmir
+DEPEND="mir-base/qtmir
 	mir-base/unity-system-compositor
 	net-misc/url-dispatcher
+	sys-apps/ubuntu-app-launch
 	unity-base/qtubuntu
 	unity-base/unity8"
 

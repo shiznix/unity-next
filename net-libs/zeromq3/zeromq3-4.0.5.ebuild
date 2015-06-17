@@ -5,12 +5,12 @@
 EAPI=5
 AUTOTOOLS_AUTORECONF=true
 
-URELEASE="vivid"
+URELEASE="vivid-security"
 inherit autotools-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/z/${PN}"
 UVER_PREFIX="+dfsg"
-UVER_SUFFIX="2"
+UVER_SUFFIX="2+deb8u1build0.15.04.1"
 
 DESCRIPTION="A brokerless kernel"
 HOMEPAGE="http://www.zeromq.org/"

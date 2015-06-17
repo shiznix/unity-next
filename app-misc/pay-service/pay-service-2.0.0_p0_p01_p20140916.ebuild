@@ -21,7 +21,6 @@ IUSE=""
 RESTRICT="mirror"
 
 DEPEND="dev-libs/glib:2
-	dev-libs/libubuntu-app-launch
 	dev-libs/process-cpp
 	dev-libs/properties-cpp
 	dev-qt/qtcore:5
@@ -29,6 +28,7 @@ DEPEND="dev-libs/glib:2
 	net-libs/ubuntuone-credentials
 	net-misc/curl
 	sys-apps/click
+	sys-apps/ubuntu-app-launch
 	x11-libs/libaccounts-qt[qt5]"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"

@@ -33,7 +33,6 @@ DEPEND="${RDEPEND}
 	dev-libs/libhybris
 	dev-libs/libsigc++:2
 	dev-libs/libunity
-	dev-libs/libupstart
 	dev-libs/libusermetrics
 	dev-perl/JSON
 	dev-python/setuptools
@@ -48,6 +47,7 @@ DEPEND="${RDEPEND}
 	media-libs/mesa
 	media-sound/pulseaudio
 	net-misc/telephony-service
+	sys-apps/upstart
 	sys-libs/libnih
 	unity-base/connectivity-api
 	unity-base/hud
@@ -83,6 +83,9 @@ src_install() {
 
 	exeinto /usr/bin
 	doexe "${FILESDIR}/unity8_run.sh"
+
+	insinto /usr/share/upstart/sessions
+	doins data/unity8{,-dash,-filewatcher}.conf
 }
 
 pkg_postinst() {
