@@ -26,7 +26,8 @@ RDEPEND="sys-auth/polkit-pkla-compat
 	unity-base/unity-scopes-shell
 	x11-libs/unity-notifications
 	x11-misc/ubuntu-keyboard
-	x11-themes/ubuntu-themes"
+	x11-themes/ubuntu-themes
+	x11-libs/gtk+:3[mir]"
 DEPEND="${RDEPEND}
 	app-misc/pay-service
 	dev-libs/glib:2

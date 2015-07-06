@@ -1,2 +1,3 @@
 app-misc/geoclue skyhook
 media-libs/qt-gstreamer qt5
+x11-libs/gtk+:3 mir
