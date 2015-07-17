@@ -24,6 +24,7 @@ IUSE=""
 RESTRICT="mirror"
 
 DEPEND="app-misc/location-service
+	dev-libs/boost:=
 	dev-libs/dbus-cpp
 	dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5

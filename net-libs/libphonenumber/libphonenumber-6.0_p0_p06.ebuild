@@ -21,7 +21,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="dev-libs/icu:=
+DEPEND="dev-libs/boost:=
+	dev-libs/icu:=
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtnetwork:5

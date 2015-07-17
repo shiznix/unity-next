@@ -20,9 +20,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc examples test"
 RESTRICT="mirror"
 
-RDEPEND="dev-libs/boost:="
 DEPEND="dev-cpp/gtest
-	dev-libs/boost
+	dev-libs/boost:=
 	dev-libs/process-cpp
 	sys-apps/dbus"
 
