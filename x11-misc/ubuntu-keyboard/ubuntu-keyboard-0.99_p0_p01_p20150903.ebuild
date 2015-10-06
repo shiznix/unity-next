@@ -4,7 +4,7 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit qt5-build gnome2-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"

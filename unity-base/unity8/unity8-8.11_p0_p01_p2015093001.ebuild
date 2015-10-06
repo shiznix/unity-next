@@ -5,7 +5,7 @@
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit gnome2-utils qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"

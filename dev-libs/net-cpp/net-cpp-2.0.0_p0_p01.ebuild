@@ -4,15 +4,14 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/n/${PN}"
-UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="C++11 library for networking processes"
 HOMEPAGE="http://launchpad.net/net-cpp"
-SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
+SRC_URI="${UURL}/${MY_P}.orig.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"

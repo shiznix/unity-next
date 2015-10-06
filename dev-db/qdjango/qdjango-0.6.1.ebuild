@@ -4,10 +4,11 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit qt5-build ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/q/${PN}"
+UVER="2"
 
 DESCRIPTION="QML Bindings for GSettings"
 HOMEPAGE="https://launchpad.net/gsettings-qt"

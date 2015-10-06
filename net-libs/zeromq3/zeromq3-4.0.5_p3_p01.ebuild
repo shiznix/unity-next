@@ -5,17 +5,17 @@
 EAPI=5
 AUTOTOOLS_AUTORECONF=true
 
-URELEASE="vivid-security"
+URELEASE="wily"
 inherit autotools-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/z/${PN}"
 UVER_PREFIX="+dfsg"
-UVER_SUFFIX="2+deb8u1build0.15.04.1"
+UVER_SUFFIX="~gcc5.1"
 
 DESCRIPTION="A brokerless kernel"
 HOMEPAGE="http://www.zeromq.org/"
 SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.bz2
-	${UURL}/${MY_P}${UVER_PREFIX}-${UVER_SUFFIX}.debian.tar.xz"
+	${UURL}/${MY_P}${UVER_PREFIX}-${UVER}${UVER_SUFFIX}.debian.tar.xz"
 
 LICENSE="LGPL-3"
 SLOT="0/4.0.0"

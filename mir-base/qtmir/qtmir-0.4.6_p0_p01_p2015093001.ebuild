@@ -4,14 +4,14 @@
 
 EAPI=5
 
-URELEASE="vivid"
-inherit qt5-build gnome2-utils ubuntu-versionator
+URELEASE="wily"
+inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/q/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
-DESCRIPTION="Qt plugins for Ubuntu Platform API (desktop)"
-HOMEPAGE="https://launchpad.net/qtubuntu"
+DESCRIPTION="Qt platform abstraction (QPA) plugin for a Mir server (desktop)"
+HOMEPAGE="https://launchpad.net/qtmir"
 SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 
 LICENSE="LGPL-3"
@@ -22,19 +22,13 @@ RESTRICT="mirror"
 
 DEPEND="dev-libs/glib:2
 	dev-qt/qtcore:5
-	dev-qt/qtdbus:5
-	dev-qt/qtgui:5[egl,evdev,opengl]
-	dev-qt/qtsensors:5
+	dev-qt/qtdeclarative:5
+	dev-qt/qtgui:5[egl]
+	dev-util/lttng-ust
 	media-libs/fontconfig
-	media-libs/freetype
 	media-libs/mesa[egl,gles2]
 	mir-base/mir
-	mir-base/platform-api"
+	sys-apps/ubuntu-app-launch"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
-QT5_BUILD_DIR="${S}"
-
-src_prepare() {
-	qt5-build_src_prepare
-	export PATH="${QT5_BINDIR}:${PATH}"
-}
+export QT_SELECT=5

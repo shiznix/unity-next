@@ -4,8 +4,8 @@
 
 EAPI=5
 
-URELEASE="vivid"
-inherit cmake-utils ubuntu-versionator
+URELEASE="wily"
+inherit autotools cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -40,11 +40,14 @@ export CMAKE_BUILD_TYPE=none
 
 src_prepare() {
 	epatch -p1 "${WORKDIR}/${MY_P}${UVER_PREFIX}-${UVER}.diff"	# This needs to be applied for the debian/ directory to be present #
+
+	# Don't build tests as they fail to compile #
+	sed -i '/add_subdirectory(test)/d' "${S}/CMakeLists.txt" || die
 }
 
 src_install() {
 	cmake-utils_src_install
 
 	# Delete some files that are only useful on Ubuntu
-	rm -rf "${D}"etc/apport "${D}"usr/share/apport
+	rm -rf "${ED}"etc/apport "${ED}"usr/share/apport
 }

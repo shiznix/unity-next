@@ -4,15 +4,16 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/z/${PN}"
+UVER_SUFFIX="~gcc5.1"
 
 DESCRIPTION="0mq 'highlevel' C++ bindings"
 HOMEPAGE="https://github.com/benjamg/zmqpp"
 SRC_URI="${UURL}/${MY_P}.orig.tar.gz
-	${UURL}/${MY_P}-${UVER}.debian.tar.gz"
+	${UURL}/${MY_P}-${UVER}${UVER_SUFFIX}.debian.tar.xz"
 
 LICENSE="MPL-2.0"
 SLOT="0"

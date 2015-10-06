@@ -4,16 +4,15 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit base cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/libp/${PN}"
-UVER_PREFIX="+r655"
 
 DESCRIPTION="Google's phone number handling library"
 HOMEPAGE="http://code.google.com/p/libphonenumber/"
-SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz
-	${UURL}/${MY_P}${UVER_PREFIX}-${UVER}.debian.tar.xz"
+SRC_URI="${UURL}/${MY_P}.orig.tar.gz
+	${UURL}/${MY_P}-${UVER}.debian.tar.xz"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
@@ -31,7 +30,7 @@ DEPEND="dev-libs/boost:=
 	unity-base/signon[qt5]
 	x11-libs/libaccounts-qt[qt5]"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}/cpp"
+S="${WORKDIR}/${PN}-${PN}-${PV}${UVER_PREFIX}/cpp"
 MAKEOPTS="${MAKEOPTS} -j1"
 
 src_prepare() {

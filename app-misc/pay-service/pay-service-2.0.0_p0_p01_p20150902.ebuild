@@ -4,11 +4,11 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/p/${PN}"
-UVER_PREFIX="+14.10.${PVR_MICRO}"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Service to allow requesting payment for an item"
 HOMEPAGE="http://launchpad.net/pay-service"
@@ -20,7 +20,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="dev-libs/glib:2
+DEPEND="dev-lang/go
+	dev-libs/glib:2
 	dev-libs/process-cpp
 	dev-libs/properties-cpp
 	dev-qt/qtcore:5

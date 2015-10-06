@@ -5,7 +5,7 @@
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit autotools base eutils python-single-r1 ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/p/${PN}"

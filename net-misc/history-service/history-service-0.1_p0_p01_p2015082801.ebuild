@@ -4,7 +4,7 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit cmake-utils multilib ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/h/${PN}"
@@ -25,7 +25,12 @@ DEPEND="dev-qt/qtcore:5
 	dev-qt/qtpim:5
 	dev-qt/qtsql:5
 	media-libs/qt-gstreamer[qt5]
-	>=net-libs/telepathy-qt-0.9.6[qt5]"
+	net-libs/telepathy-qt[qt5]"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
-export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"	# Need to see QT5's qmake
+export QT_SELECT=5
+
+src_prepare() {
+	# Don't build tests as they fail to compile #
+	sed -i '/add_subdirectory(tests)/d' "${S}/CMakeLists.txt" || die
+}

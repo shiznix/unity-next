@@ -4,15 +4,14 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/l/${PN}"
-UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Location service aggregating position/velocity/heading"
 HOMEPAGE="http://launchpad.net/location-service"
-SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
+SRC_URI="${UURL}/${MY_P}.orig.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -20,10 +19,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="dev-libs/boost:="
 DEPEND="dev-cpp/gflags
 	dev-cpp/glog
-	dev-libs/boost
+	dev-libs/boost:=
 	dev-libs/dbus-cpp
 	dev-libs/json-c
 	dev-libs/net-cpp

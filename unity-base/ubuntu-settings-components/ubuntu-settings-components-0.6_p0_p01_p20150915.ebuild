@@ -4,7 +4,7 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
@@ -28,4 +28,4 @@ DEPEND="dev-qt/qtcore:5
 	x11-libs/ubuntu-ui-toolkit"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
-export PATH="${PATH}:/usr/$(get_libdir)/qt5/bin"	# Need to see QT5's qmake
+export QT_SELECT=5

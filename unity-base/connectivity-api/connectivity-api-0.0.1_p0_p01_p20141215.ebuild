@@ -24,4 +24,4 @@ DEPEND="dev-qt/qtcore:5
 	dev-qt/qtdbus:5"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
-export PATH="${PATH}:/usr/$(get_libdir)/qt5/bin"	# Need to see QT5's qmake
+export QT_SELECT=5

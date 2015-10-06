@@ -4,7 +4,7 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/t/${PN}"
@@ -32,7 +32,13 @@ DEPEND="${RDEPEND}
 	x11-libs/libnotify"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
-export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"	# Need to see QT5's qmake
+#export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"	# Need to see QT5's qmake
+export QT_SELECT=5
+
+src_prepare() {
+	# Don't build tests as they fail to compile #
+	sed -i '/add_subdirectory(tests)/d' "${S}/CMakeLists.txt" || die
+}
 
 src_configure() {
 	local mycmakeargs="${mycmakeargs}

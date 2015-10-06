@@ -6,7 +6,7 @@ EAPI=5
 PYTHON_COMPAT=( python3_4 )
 VIRTUALX_REQUIRED=always
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit cmake-utils python-single-r1 virtualx ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
@@ -20,7 +20,7 @@ SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="doc"
 RESTRICT="mirror"
 
 DEPEND="app-misc/location-service
@@ -34,7 +34,8 @@ DEPEND="app-misc/location-service
 	unity-base/unity
 	unity-base/unity-api
 	unity-base/unity-scopes-api
-	x11-libs/gsettings-qt"
+	x11-libs/gsettings-qt
+	doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 export QT_SELECT=5
@@ -45,6 +46,12 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch -p1 "${WORKDIR}/${MY_P}${UVER_PREFIX}-${UVER}.diff"	# This needs to be applied for the debian/ directory to be present #
+
+	use doc || \
+		sed -e '/add_subdirectory(docs)/d' \
+			-i CMakeLists.txt
+
 	sed -e "s:python-py34:python-3.4:g" \
 		-e "s:lib/python3/dist-packages/scope_harness:lib/${EPYTHON}/site-packages/scope_harness:g" \
 			-i "src/python/scope_harness/CMakeLists.txt"
@@ -54,6 +61,8 @@ src_prepare() {
 src_compile() {
 	# 'make' needs to be run in a virtual Xserver so that qmlplugindump's #
 	#       qmltypes generation can successfully spawn dbus #
+	# Xvfb requires TMPDIR be set to /tmp to run correctly ([xkb] Can't rename /tmp/tmp.qH... to /var/lib/xkb/server-B20D7F.xkm, error: Invalid cross-device link) #
+	local TMPDIR=/tmp
 	VIRTUALX_COMMAND=cmake-utils_src_compile virtualmake
 }
 

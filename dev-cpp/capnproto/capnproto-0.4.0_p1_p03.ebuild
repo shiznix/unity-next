@@ -4,7 +4,7 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit eutils autotools-multilib ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/c/${PN}"
