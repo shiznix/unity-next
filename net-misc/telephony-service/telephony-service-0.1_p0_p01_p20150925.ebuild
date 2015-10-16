@@ -45,3 +45,9 @@ src_configure() {
 		-DCMAKE_INSTALL_LOCALSTATEDIR=/var"
 	cmake-utils_src_configure
 }
+
+
+src_install() {
+	cmake-utils_src_install
+        find "${ED}" -name "*.pkla" -exec chown root:polkitd {} \;
+}

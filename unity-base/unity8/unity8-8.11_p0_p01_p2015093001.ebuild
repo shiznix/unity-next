@@ -87,6 +87,8 @@ src_install() {
 
 	insinto /usr/share/upstart/sessions
 	doins data/unity8{,-dash,-filewatcher}.conf
+
+	find "${ED}" -name "*.pkla" -exec chown root:polkitd {} \;
 }
 
 pkg_postinst() {
