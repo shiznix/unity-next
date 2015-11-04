@@ -4,10 +4,9 @@
 
 EAPI=5
 PYTHON_COMPAT=( python3_4 )
-VIRTUALX_REQUIRED=always
 
 URELEASE="wily"
-inherit cmake-utils python-single-r1 virtualx ubuntu-versionator
+inherit cmake-utils python-single-r1 ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -39,6 +38,7 @@ DEPEND="app-misc/location-service
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 export QT_SELECT=5
+unset QT_QPA_PLATFORMTHEME
 
 pkg_setup() {
 	ubuntu-versionator_pkg_setup
@@ -56,16 +56,4 @@ src_prepare() {
 		-e "s:lib/python3/dist-packages/scope_harness:lib/${EPYTHON}/site-packages/scope_harness:g" \
 			-i "src/python/scope_harness/CMakeLists.txt"
 	cmake-utils_src_prepare
-}
-
-src_compile() {
-	# 'make' needs to be run in a virtual Xserver so that qmlplugindump's #
-	#       qmltypes generation can successfully spawn dbus #
-	# Xvfb requires TMPDIR be set to /tmp to run correctly ([xkb] Can't rename /tmp/tmp.qH... to /var/lib/xkb/server-B20D7F.xkm, error: Invalid cross-device link) #
-	local TMPDIR=/tmp
-	VIRTUALX_COMMAND=cmake-utils_src_compile virtualmake
-}
-
-src_install() {
-	VIRTUALX_COMMAND=cmake-utils_src_install virtualmake
 }

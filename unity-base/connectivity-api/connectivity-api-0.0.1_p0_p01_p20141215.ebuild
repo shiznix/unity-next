@@ -4,11 +4,11 @@
 
 EAPI=5
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/c/${PN}"
-UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
+UVER_PREFIX="+15.04.${PVR_MICRO}"
 
 DESCRIPTION="Ubuntu Connectivity Qt API"
 HOMEPAGE="https://launchpad.net/connectivity-api"

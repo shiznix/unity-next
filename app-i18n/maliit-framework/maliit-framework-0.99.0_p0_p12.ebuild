@@ -9,12 +9,11 @@ inherit qt5-build ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/m/${PN}"
 UVER_PREFIX="+git20130923+17fdf86"
-UVER_SUFFIX="~gcc5.1"
 
 DESCRIPTION="Maliit Input Method Framework"
 HOMEPAGE="https://wiki.maliit.org/"
 SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz
-	${UURL}/${MY_P}${UVER_PREFIX}-${UVER}${UVER_SUFFIX}.debian.tar.xz"
+	${UURL}/${MY_P}${UVER_PREFIX}-${UVER}.debian.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

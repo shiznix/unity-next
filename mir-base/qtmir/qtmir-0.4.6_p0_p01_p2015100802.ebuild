@@ -27,7 +27,7 @@ DEPEND="dev-libs/glib:2
 	dev-util/lttng-ust
 	media-libs/fontconfig
 	media-libs/mesa[egl,gles2]
-	mir-base/mir
+	mir-base/mir:=
 	sys-apps/ubuntu-app-launch"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
