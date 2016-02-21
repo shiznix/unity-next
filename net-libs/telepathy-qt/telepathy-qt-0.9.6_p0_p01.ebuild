@@ -6,7 +6,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 
-URELEASE="vivid"
+URELEASE="wily"
 inherit python-any-r1 cmake-utils virtualx multibuild ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/t/${PN}"
