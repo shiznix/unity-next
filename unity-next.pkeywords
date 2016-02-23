@@ -1,4 +1,5 @@
 */*::unity-next
 
 dev-qt/qtscript:5
+dev-util/valgrind
 media-libs/qt-gstreamer

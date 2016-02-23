@@ -5,7 +5,7 @@
 EAPI=5
 
 URELEASE="wily"
-inherit cmake-utils ubuntu-versionator
+inherit cmake-utils flag-o-matic ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/n/${PN}"
 
@@ -25,3 +25,10 @@ DEPEND="dev-libs/boost:=
 	net-misc/curl"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+
+src_prepare() {
+	# Disable '-Werror' #
+	sed -e 's/-Werror//g' \
+		-i CMakeLists.txt
+	cmake-utils_src_prepare
+}

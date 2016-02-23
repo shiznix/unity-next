@@ -1,2 +1,0 @@
-dev-libs/jsoncpp::gentoo	# Gentoo version doesn't install jsoncpp.pc pkgconfig file
-net-libs/telepathy-qt::gentoo	# net-misc/history-service requires >=0.9.6 not available in portage tree
