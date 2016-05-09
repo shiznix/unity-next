@@ -81,7 +81,7 @@ PVR_PL_MINOR="${PVR_PL_MINOR_tmp// /.}"
 PVR_PL_MICRO="${PVR_ARRAY[3]}"
 PVR_PL_MICRO="${PVR_PL_MICRO%*_}"
 PVR_PL_MICRO="${PVR_PL_MICRO%%-r*}"	# Strip revision strings
-	[[ -n "${strarray[@]}" ]] && unset strarray[@]
+	[[ -n "${strarray[@]}" ]] && unset "strarray[@]"
 	char=2
 	index=1
 	strlength="${#PVR_PL_MICRO}"
