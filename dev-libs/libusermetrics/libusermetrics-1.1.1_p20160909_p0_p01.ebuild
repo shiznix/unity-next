@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit cmake-utils gnome2-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/libu/${PN}"
+UURL="mirror://ubuntu/pool/main/libu/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Library for retrieving anonymous metrics about users"

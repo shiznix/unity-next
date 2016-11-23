@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/t/${PN}"
+UURL="mirror://ubuntu/pool/main/t/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Telephony service components for Ubuntu"
@@ -36,6 +36,7 @@ S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 export QT_SELECT=5
 
 src_prepare() {
+	ubuntu-versionator_src_prepare
 	# Don't build tests as they fail to compile #
 	sed -i '/add_subdirectory(tests)/d' "${S}/CMakeLists.txt" || die
 }

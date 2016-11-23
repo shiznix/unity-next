@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/u/${PN}"
-UVER_PREFIX="+${UVER_RELEASE}.20150623.is.0.1.2+${UVER_RELEASE}.${PVR_MICRO}"
+UURL="mirror://ubuntu/pool/main/u/${PN}"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Server and client library for desktop notifications in Unity"
 HOMEPAGE="https://launchpad.net/qmenumodel"

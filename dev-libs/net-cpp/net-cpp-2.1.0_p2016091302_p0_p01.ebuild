@@ -2,16 +2,17 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit cmake-utils flag-o-matic ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/n/${PN}"
+UURL="mirror://ubuntu/pool/main/n/${PN}"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="C++11 library for networking processes"
 HOMEPAGE="http://launchpad.net/net-cpp"
-SRC_URI="${UURL}/${MY_P}.orig.tar.gz"
+SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -27,6 +28,7 @@ DEPEND="dev-libs/boost:=
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
 src_prepare() {
+	ubuntu-versionator_src_prepare
 	# Disable '-Werror' #
 	sed -e 's/-Werror//g' \
 		-i CMakeLists.txt

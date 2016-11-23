@@ -3,12 +3,12 @@
 # $Header: $
 
 EAPI=5
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
-URELEASE="wily"
-inherit gnome2-utils qt5-build cmake-utils ubuntu-versionator
+URELEASE="yakkety"
+inherit gnome2-utils multilib qt5-build cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/u/${PN}"
+UURL="mirror://ubuntu/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Unity 8 desktop shell"
@@ -50,10 +50,10 @@ DEPEND="${RDEPEND}
 	net-misc/telephony-service
 	sys-apps/upstart
 	sys-libs/libnih
-	unity-base/connectivity-api
 	unity-base/hud
 	unity-base/ubuntu-system-settings
 	unity-base/unity-api
+	unity-indicators/indicator-network
 	x11-libs/dee-qt
 	x11-libs/gsettings-qt
 	x11-libs/libxcb
@@ -69,6 +69,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	ubuntu-versionator_src_prepare
 	qt5-build_src_prepare
 	cmake-utils_src_prepare
 }

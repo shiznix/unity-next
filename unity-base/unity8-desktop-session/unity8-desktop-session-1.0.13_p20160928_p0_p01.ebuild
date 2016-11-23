@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit autotools eutils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/u/${PN}"
+UURL="mirror://ubuntu/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Unity8 desktop session"
@@ -31,6 +31,7 @@ DEPEND="mir-base/qtmir
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
 src_prepare() {
+	ubuntu-versionator_src_prepare
 	sed -e '/export QT_QPA_PLATFORM/a unset QT_QPA_PLATFORMTHEME   # appmenu-qt5 tries to load gtk2 libs thus breaking Mir display' \
 		-i data/lightdm-unity8-session
 	eautoreconf

@@ -2,13 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/z/${PN}"
-UVER_SUFFIX="~gcc5.1"
+UURL="mirror://ubuntu/pool/main/z/${PN}"
 
 DESCRIPTION="0mq 'highlevel' C++ bindings"
 HOMEPAGE="https://github.com/benjamg/zmqpp"
@@ -24,11 +23,7 @@ DEPEND="net-libs/zeromq3"
 RESTRICT="mirror"
 
 src_prepare() {
-	# Ubuntu patchset #
-	for patch in $(cat "${WORKDIR}/debian/patches/series" | grep -v '#'); do
-		PATCHES+=( "${WORKDIR}/debian/patches/${patch}" )
-	done
-
+	ubuntu-versionator_src_prepare
 	sed -e 's:/usr/local:/usr:g' \
 		-i Makefile
 }

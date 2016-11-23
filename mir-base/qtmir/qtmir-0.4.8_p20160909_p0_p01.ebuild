@@ -2,34 +2,33 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/p/${PN}"
+UURL="mirror://ubuntu/pool/main/q/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
-DESCRIPTION="Service to allow requesting payment for an item"
-HOMEPAGE="http://launchpad.net/pay-service"
+DESCRIPTION="Qt platform abstraction (QPA) plugin for a Mir server (desktop)"
+HOMEPAGE="https://launchpad.net/qtmir"
 SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 
-LICENSE="GPL-3"
+LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="dev-lang/go
-	dev-libs/glib:2
-	dev-libs/process-cpp
-	dev-libs/properties-cpp
+DEPEND="dev-libs/glib:2
 	dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5
-	net-libs/ubuntuone-credentials
-	net-misc/curl
-	sys-apps/click
-	sys-apps/ubuntu-app-launch
-	x11-libs/libaccounts-qt[qt5]"
+	dev-qt/qtgui:5[egl]
+	dev-util/lttng-ust
+	media-libs/fontconfig
+	media-libs/mesa[egl,gles2]
+	mir-base/mir:=
+	sys-apps/ubuntu-app-launch"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+export QT_SELECT=5

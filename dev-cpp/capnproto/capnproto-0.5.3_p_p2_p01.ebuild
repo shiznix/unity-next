@@ -4,10 +4,10 @@
 
 EAPI=5
 
-URELEASE="wily"
-inherit base eutils autotools-multilib ubuntu-versionator
+URELEASE="yakkety"
+inherit eutils autotools-multilib ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/c/${PN}"
+UURL="mirror://ubuntu/pool/main/c/${PN}"
 
 DESCRIPTION="RPC/Serialization system with capabilities support"
 HOMEPAGE="http://capnproto.org"
@@ -23,12 +23,7 @@ RESTRICT="mirror"
 S="${WORKDIR}/${PN}-c++-${PV}"
 
 src_prepare() {
-	# Ubuntu patchset #
-	for patch in $(cat "${WORKDIR}/debian/patches/series" | grep -v '#'); do
-		PATCHES+=( "${WORKDIR}/debian/patches/${patch}" )
-	done
-	base_src_prepare
-
+	ubuntu-versionator_src_prepare
 	sed -e '/ldconfig/d' \
 		-i Makefile.am
 	eautoreconf

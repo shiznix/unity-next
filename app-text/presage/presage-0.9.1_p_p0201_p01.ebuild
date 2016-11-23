@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 PYTHON_COMPAT=( python2_7 )
 
-URELEASE="wily"
-inherit autotools base eutils python-single-r1 ubuntu-versionator
+URELEASE="yakkety"
+inherit autotools eutils python-single-r1 ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/p/${PN}"
 
@@ -39,11 +39,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	# Ubuntu patchset #
-	for patch in $(cat "${WORKDIR}/debian/patches/series" | grep -v \# ); do
-		PATCHES+=( "${WORKDIR}/debian/patches/${patch}" )
-	done
-	base_src_prepare
+	ubuntu-versionator_src_prepare
 	eautoreconf
 }
 

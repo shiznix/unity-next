@@ -2,16 +2,16 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
-inherit base cmake-utils ubuntu-versionator
+URELEASE="yakkety"
+inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/libp/${PN}"
+UURL="mirror://ubuntu/pool/main/libp/${PN}"
 
 DESCRIPTION="Google's phone number handling library"
 HOMEPAGE="http://code.google.com/p/libphonenumber/"
-SRC_URI="${UURL}/${MY_P}.orig.tar.gz
+SRC_URI="${UURL}/${MY_P}.orig.tar.bz2
 	${UURL}/${MY_P}-${UVER}.debian.tar.xz"
 
 LICENSE="GPL-3 LGPL-3"
@@ -34,12 +34,7 @@ S="${WORKDIR}/${PN}-${PN}-${PV}${UVER_PREFIX}/cpp"
 MAKEOPTS="${MAKEOPTS} -j1"
 
 src_prepare() {
-	# Ubuntu patchset #
-	for patch in $(cat "${WORKDIR}/debian/patches/series" | grep -v \# ); do
-		PATCHES+=( "${WORKDIR}/debian/patches/${patch}" )
-	done
-	base_src_prepare
-
+	ubuntu-versionator_src_prepare
 	# Disable '-Werror' #
 	sed -e 's/-Werror//g' \
 		-i CMakeLists.txt

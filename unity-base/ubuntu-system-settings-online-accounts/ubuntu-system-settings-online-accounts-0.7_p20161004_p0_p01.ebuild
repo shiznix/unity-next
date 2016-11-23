@@ -5,10 +5,10 @@
 EAPI=6
 PYTHON_COMPAT=( python3_4 )
 
-URELEASE="xenial"
+URELEASE="yakkety"
 inherit python-single-r1 qt5-build ubuntu-versionator
 
-UURL="mirror://unity/pool/universe/u/${PN}"
+UURL="mirror://unity/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Online Accounts setup for Ubuntu Touch"
@@ -17,7 +17,7 @@ SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 

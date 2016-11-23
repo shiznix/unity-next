@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/p/${PN}"
+UURL="mirror://ubuntu/pool/main/p/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Implementation of the Platform API for a Mir server"
@@ -20,9 +20,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="dev-libs/boost:="
 DEPEND="app-misc/location-service
-	dev-libs/boost
+	dev-libs/boost:=
 	dev-libs/dbus-cpp
 	mir-base/mir
 	net-misc/url-dispatcher
@@ -31,6 +30,7 @@ DEPEND="app-misc/location-service
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
 src_prepare() {
+	ubuntu-versionator_src_prepare
 	# Strip/disable android related hybris support #
 	sed -e 's:add_subdirectory(touch)::g' \
 		-i src/ubuntu/application/CMakeLists.txt

@@ -2,14 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit qt5-build cmake-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/q/${PN}"
-UVER_PREFIX="+15.04.${PVR_MICRO}"
-UVER_SUFFIX="~gcc5.1"
+UURL="mirror://ubuntu/pool/main/q/${PN}"
+UVER_PREFIX="+16.04.${PVR_MICRO}"
 
 DESCRIPTION="GMenuModel Qt bindings"
 HOMEPAGE="https://launchpad.net/qmenumodel"
@@ -33,6 +32,7 @@ DEPEND="dev-libs/glib:2
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
 src_prepare() {
+	ubuntu-versionator_src_prepare
 	qt5-build_src_prepare
 	export PATH="${QT5_BINDIR}:${PATH}"
 }

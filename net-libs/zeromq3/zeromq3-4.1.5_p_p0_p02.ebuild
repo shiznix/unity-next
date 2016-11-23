@@ -5,17 +5,16 @@
 EAPI=5
 AUTOTOOLS_AUTORECONF=true
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit autotools-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/z/${PN}"
-UVER_PREFIX="+dfsg"
-UVER_SUFFIX="~gcc5.1"
+UURL="mirror://ubuntu/pool/main/z/${PN}"
+UVER_PREFIX="+git20160811+2fc86bc"
 
 DESCRIPTION="A brokerless kernel"
 HOMEPAGE="http://www.zeromq.org/"
-SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.bz2
-	${UURL}/${MY_P}${UVER_PREFIX}-${UVER}${UVER_SUFFIX}.debian.tar.xz"
+SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz
+	${UURL}/${MY_P}${UVER_PREFIX}-${UVER}.debian.tar.xz"
 
 LICENSE="LGPL-3"
 SLOT="0/4.0.0"
@@ -34,11 +33,7 @@ RESTRICT="mirror"
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 
 src_prepare() {
-	# Ubuntu patchset #
-	for patch in $(cat "${WORKDIR}/debian/patches/series" | grep -v '#'); do
-		PATCHES+=( "${WORKDIR}/debian/patches/${patch}" )
-	done
-
+	ubuntu-versionator_src_prepare
 	einfo "Removing bundled OpenPGM library"
 	rm -fr "${S}"/foreign/openpgm/libpgm* || die
 	sed \

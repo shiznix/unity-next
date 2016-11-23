@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit qt5-build gnome2-utils ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/u/${PN}"
-UVER_PREFIX=".trunk.phablet2+${UVER_RELEASE}.${PVR_MICRO}"
+UURL="mirror://ubuntu/pool/main/u/${PN}"
+UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="Ubuntu on-screen keyboard data files"
 HOMEPAGE="https://launchpad.net/ubuntu-keyboard"
@@ -23,6 +23,11 @@ RESTRICT="mirror"
 DEPEND="app-i18n/libpinyin
 	app-i18n/maliit-framework
 	app-text/presage
+	dev-qt/qtcore:5
+	dev-qt/qtdbus:5
+	dev-qt/qtdeclarative:5
+	dev-qt/qtgui:5
+	mir-base/mir:=
 	mir-base/platform-api
 	x11-libs/ubuntu-ui-toolkit"
 
@@ -30,6 +35,7 @@ S="${WORKDIR}/${PN}-${PV}${UVER_SUFFIX}${UVER_PREFIX}"
 QT5_BUILD_DIR="${S}"
 
 src_prepare() {
+	ubuntu-versionator_src_prepare
 	qt5-build_src_prepare
 	export PATH="${QT5_BINDIR}:${PATH}"
 }

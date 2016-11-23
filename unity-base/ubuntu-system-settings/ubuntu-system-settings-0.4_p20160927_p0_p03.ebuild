@@ -4,10 +4,10 @@
 
 EAPI=6
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit cmake-utils ubuntu-versionator
 
-UURL="mirror://unity/pool/universe/u/${PN}"
+UURL="mirror://unity/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="System Settings application for Ubuntu Touch"
@@ -35,7 +35,7 @@ DEPEND="dev-libs/glib:2
 	sys-auth/polkit
 	sys-power/upower"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 
 src_prepare() {
 	ubuntu-versionator_src_prepare

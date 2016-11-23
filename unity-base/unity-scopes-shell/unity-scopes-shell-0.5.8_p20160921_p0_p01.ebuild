@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 PYTHON_COMPAT=( python3_4 )
 
-URELEASE="wily"
+URELEASE="yakkety"
 inherit cmake-utils python-single-r1 ubuntu-versionator
 
-UURL="mirror://ubuntu/pool/universe/u/${PN}"
+UURL="mirror://ubuntu/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
 
 DESCRIPTION="QML plugin that exposes Scopes functionality to Unity shell"
@@ -46,6 +46,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	ubuntu-versionator_src_prepare
 	epatch -p1 "${WORKDIR}/${MY_P}${UVER_PREFIX}-${UVER}.diff"	# This needs to be applied for the debian/ directory to be present #
 
 	use doc || \
