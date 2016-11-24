@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -27,7 +27,7 @@ DEPEND="app-misc/location-service
 	net-misc/url-dispatcher
 	sys-apps/dbus"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
@@ -36,12 +36,12 @@ src_prepare() {
 		-i src/ubuntu/application/CMakeLists.txt
 	sed -e 's:add_subdirectory(hardware)::g' \
 		-i src/ubuntu/CMakeLists.txt
+	cmake-utils_src_prepare
 }
 
 src_configure() {
-	local mycmakeargs="${mycmakeargs}
-		-DENABLE_MIRSERVER_IMPLEMENTATION=ON
-		-DENABLE_MIRCLIENT_IMPLEMENTATION=ON"
+	mycmakeargs+=(-DENABLE_MIRSERVER_IMPLEMENTATION=ON
+		-DENABLE_MIRCLIENT_IMPLEMENTATION=ON)
 	cmake-utils_src_configure
 
 	# Ubuntu's 'pkg-config --cflags ...' outputs 'Requires:' first, and 'Cflags:' last #

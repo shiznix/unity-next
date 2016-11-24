@@ -38,7 +38,8 @@ src_prepare() {
 	rm -fr "${S}"/foreign/openpgm/libpgm* || die
 	sed \
 		-e '/libzmq_werror=/s:yes:no:g' \
-		-i configure.ac || die
+		-e '/LIBUNWIND_LIBS/a AC_CHECK_LIB([dl], [dladdr])' \
+			-i configure.ac || die
 	autotools-utils_src_prepare
 }
 
@@ -55,5 +56,5 @@ src_test() {
 src_install() {
 	autotools-utils_src_install
 	doheader "${WORKDIR}/debian/zmq.hpp"
-	doman doc/*.[1-9]
+	doman ${BUILD_DIR}/doc/*.[1-9]
 }

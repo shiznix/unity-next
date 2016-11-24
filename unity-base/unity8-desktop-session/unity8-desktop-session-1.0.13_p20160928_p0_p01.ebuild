@@ -28,7 +28,7 @@ DEPEND="mir-base/qtmir
 	unity-base/unity8
 	unity-scopes/unity-scope-click"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 
 src_prepare() {
 	ubuntu-versionator_src_prepare

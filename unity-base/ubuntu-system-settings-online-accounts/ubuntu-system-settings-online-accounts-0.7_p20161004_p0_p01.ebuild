@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -31,7 +31,7 @@ DEPEND="dev-libs/glib:2
 	mir-base/mir
 	net-libs/oxide-qt
 	sys-apps/click
-	unity-base/signon[qt5]
+	unity-base/signon
 	unity-base/signon-ui
 	unity-base/ubuntu-system-settings
 	x11-libs/libaccounts-qt

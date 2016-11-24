@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -28,6 +28,12 @@ DEPEND="dev-qt/qtcore:5
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
 QT5_BUILD_DIR="${S}"
 export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"	# Need to see QT5's qmake
+
+src_prepare() {
+	ubuntu-versionator_src_prepare
+	epatch -p1 "${FILESDIR}/fix_gcc6_ftbfs.patch"
+	qt5-build_src_prepare
+}
 
 src_configure() {
 	qmake PREFIX=/usr

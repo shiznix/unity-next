@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -31,12 +31,12 @@ DEPEND="dev-cpp/gflags
 	dev-libs/trust-store
 	sys-apps/dbus"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}/${PN}"
 
 src_configure() {
 	# GPS is for the Android platform, so disable it #
-	mycmakeargs="${mycmakeargs}
-		-DLOCATION_SERVICE_ENABLE_GPS_PROVIDER=FALSE"
+	mycmakeargs+=(-DLOCATION_SERVICE_ENABLE_GPS_PROVIDER=FALSE
+			-DUBUNTU_LOCATION_SERVICE_VERSION_MAJOR=3)
 	cmake-utils_src_configure
 
 	# Ubuntu's 'pkg-config --cflags ...' outputs Requires: first and Cflags: last #

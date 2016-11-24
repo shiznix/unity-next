@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -20,18 +20,24 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="dev-cpp/capnproto
-	dev-cpp/gmock
+DEPEND="dev-cpp/gmock
 	dev-libs/boost:=
+	dev-libs/capnproto
 	dev-libs/glib:2
+	dev-libs/json-glib
 	dev-libs/jsoncpp
 	dev-libs/libaccounts-glib
 	dev-libs/libsignon-glib
 	dev-libs/net-cpp
 	dev-libs/process-cpp
+	dev-libs/userspace-rcu
+	dev-util/astyle
+	dev-util/cppcheck
+	dev-util/lttng-tools[ust]
 	dev-util/valgrind
 	net-libs/zeromq3
 	net-libs/zmqpp
+	sys-libs/libapparmor
 	unity-base/unity-api"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
@@ -39,10 +45,18 @@ export CMAKE_BUILD_TYPE=none
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
-	epatch -p1 "${WORKDIR}/${MY_P}${UVER_PREFIX}-${UVER}.diff"	# This needs to be applied for the debian/ directory to be present #
 
 	# Don't build tests as they fail to compile #
 	sed -i '/add_subdirectory(test)/d' "${S}/CMakeLists.txt" || die
+
+	# Gentoo's lsb-release will never match the source's expected output of a Ubuntu system #
+	sed -e "s:.*COMMAND lsb_release.*:set(SERIES $URELEASE):g" \
+		-i CMakeLists.txt || die
+	# Don't install Ubuntu specific package 'version' info file #
+	sed '/${CMAKE_CURRENT_BINARY_DIR}\/version/d' \
+		-i data/CMakeLists.txt
+
+	cmake-utils_src_prepare
 }
 
 src_install() {

@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -27,8 +27,8 @@ DEPEND="dev-libs/boost:=
 	dev-qt/qtnetwork:5
 	dev-qt/qtxml:5
 	net-libs/liboauth
-	unity-base/signon[qt5]
-	x11-libs/libaccounts-qt[qt5]"
+	unity-base/signon
+	x11-libs/libaccounts-qt"
 
 S="${WORKDIR}/${PN}-${PN}-${PV}${UVER_PREFIX}/cpp"
 MAKEOPTS="${MAKEOPTS} -j1"

@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -30,6 +30,6 @@ DEPEND="dev-lang/go
 	net-misc/curl
 	sys-apps/click
 	sys-apps/ubuntu-app-launch
-	x11-libs/libaccounts-qt[qt5]"
+	x11-libs/libaccounts-qt"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"

@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -60,7 +60,7 @@ DEPEND="${RDEPEND}
 	x11-libs/qmenumodel
 	x11-libs/ubuntu-ui-toolkit"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"
 
 pkg_setup() {

@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -20,9 +20,11 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="app-i18n/libpinyin
+DEPEND="app-i18n/anthy
+	app-i18n/libpinyin
 	app-i18n/maliit-framework
 	app-text/presage
+	dev-libs/libchewing
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtdeclarative:5
@@ -31,7 +33,7 @@ DEPEND="app-i18n/libpinyin
 	mir-base/platform-api
 	x11-libs/ubuntu-ui-toolkit"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_SUFFIX}${UVER_PREFIX}"
+S="${WORKDIR}"
 QT5_BUILD_DIR="${S}"
 
 src_prepare() {

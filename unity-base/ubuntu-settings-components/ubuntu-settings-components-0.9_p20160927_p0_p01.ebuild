@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -27,5 +27,5 @@ DEPEND="dev-qt/qtcore:5
 	x11-themes/ubuntu-themes
 	x11-libs/ubuntu-ui-toolkit"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 export QT_SELECT=5

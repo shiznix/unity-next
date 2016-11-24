@@ -36,15 +36,16 @@ DEPEND="app-admin/packagekit-base
 	net-libs/ubuntuone-credentials
 	sys-apps/ubuntu-app-launch
 	sys-apps/upstart
-	unity-base/signon[qt5]
+	unity-base/signon
 	unity-base/unity-scopes-api
 	x11-libs/gsettings-qt"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 
 src_prepare() {
-	# Disable '-Werror'
-	sed -e 's/-Werror//g' \
+	ubuntu-versionator_src_prepare
+	# Disable '-Werror' #
+	sed -e 's/-Werror //g' \
 		-i CMakeLists.txt
 
 	# Gentoo does not allow /usr/sbin in user's $PATH #
@@ -52,4 +53,12 @@ src_prepare() {
 		-i tools/init-departments/CMakeLists.txt
 
 	cmake-utils_src_prepare
+}
+
+src_install() {
+	cmake-utils_src_install
+
+	# Remove all installed language files as they can be incomplete #
+	# due to being provided by Ubuntu's language-pack packages #
+	rm -rf "${ED}usr/share/locale"
 }

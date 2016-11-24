@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -31,7 +31,7 @@ DEPEND="dev-db/qdjango
 	sys-libs/libapparmor
 	x11-libs/gsettings-qt"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 
 pkg_preinst() {
 	gnome2_schemas_savelist

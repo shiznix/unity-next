@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -31,7 +31,7 @@ DEPEND="dev-libs/glib:2
 	mir-base/mir
 	mir-base/platform-api"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 QT5_BUILD_DIR="${S}"
 
 src_prepare() {
