@@ -27,6 +27,21 @@ DEPEND="app-crypt/libsecret
 	net-misc/networkmanager
 	net-misc/ofono
 	net-misc/url-dispatcher
+	x11-libs/libqofono
 	x11-themes/ubuntu-themes"
 
 S="${WORKDIR}"
+export QT_SELECT=5
+
+src_configure() {
+	# FIXME: Tests requires a 'gmenuharness' ebuild #
+	mycmakeargs+=(-DENABLE_TESTS=FALSE)
+	cmake-utils_src_configure
+}
+
+src_install() {
+	cmake-utils_src_install
+	# Remove all installed language files as they can be incomplete #
+	# due to being provided by Ubuntu's language-pack packages #
+	rm -rf "${ED}usr/share/locale"
+}

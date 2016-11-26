@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
 URELEASE="yakkety"
-inherit gnome2-utils multilib qt5-build cmake-utils ubuntu-versionator
+inherit gnome2-utils qt5-build cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -31,6 +31,7 @@ RDEPEND="sys-auth/polkit-pkla-compat
 DEPEND="${RDEPEND}
 	app-misc/pay-service
 	dev-libs/glib:2
+	dev-libs/libevdev
 	dev-libs/libhybris
 	dev-libs/libsigc++:2
 	dev-libs/libunity
@@ -47,6 +48,7 @@ DEPEND="${RDEPEND}
 	media-fonts/ubuntu-font-family
 	media-libs/mesa
 	media-sound/pulseaudio
+	net-libs/ubuntu-download-manager
 	net-misc/telephony-service
 	sys-apps/upstart
 	sys-libs/libnih
@@ -61,7 +63,7 @@ DEPEND="${RDEPEND}
 	x11-libs/ubuntu-ui-toolkit"
 
 S="${WORKDIR}"
-export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"
+export QT_SELECT=5
 
 pkg_setup() {
 	ubuntu-versionator_pkg_setup
@@ -70,13 +72,17 @@ pkg_setup() {
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
+
+	# Don't install Ubuntu specific package 'version' info file #
+	sed '/${CMAKE_CURRENT_BINARY_DIR}\/version/d' \
+		-i data/CMakeLists.txt
+
 	qt5-build_src_prepare
 	cmake-utils_src_prepare
 }
 
 src_configure() {
-	local mycmakeargs="${mycmakeargs}
-		-DCMAKE_INSTALL_LOCALSTATEDIR=/var"
+	mycmakeargs+=(-DCMAKE_INSTALL_LOCALSTATEDIR=/var)
 	cmake-utils_src_configure
 }
 
@@ -90,6 +96,10 @@ src_install() {
 	doins data/unity8{,-dash,-filewatcher}.conf
 
 	find "${ED}" -name "*.pkla" -exec chown root:polkitd {} \;
+
+	# Remove all installed language files as they can be incomplete #
+	# due to being provided by Ubuntu's language-pack packages #
+	rm -rf "${ED}usr/share/locale"
 }
 
 pkg_postinst() {

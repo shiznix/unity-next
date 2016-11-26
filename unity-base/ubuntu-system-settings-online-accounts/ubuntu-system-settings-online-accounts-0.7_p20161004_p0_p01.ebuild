@@ -38,7 +38,7 @@ DEPEND="dev-libs/glib:2
 	x11-libs/libnotify
 	x11-libs/ubuntu-ui-toolkit"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 MAKEOPTS="${MAKEOPTS} -j1"
 
 QT5_BUILD_DIR="${S}"

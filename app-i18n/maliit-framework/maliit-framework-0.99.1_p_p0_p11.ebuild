@@ -27,9 +27,9 @@ DEPEND="dev-qt/qtcore:5
 	dev-qt/qtgui:5"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+export QT_SELECT=5
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
 	qt5-build_src_prepare
-	export PATH="${QT5_BINDIR}:${PATH}"
 }

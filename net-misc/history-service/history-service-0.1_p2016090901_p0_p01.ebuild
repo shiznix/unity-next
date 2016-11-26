@@ -20,18 +20,21 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND="dev-qt/qtcore:5
+DEPEND="dev-db/sqlite:3
+	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtpim:5
 	dev-qt/qtsql:5
 	media-libs/qt-gstreamer[qt5]
+	net-libs/libphonenumber
 	net-libs/telepathy-qt[qt5]"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 export QT_SELECT=5
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
 	# Don't build tests as they fail to compile #
 	sed -i '/add_subdirectory(tests)/d' "${S}/CMakeLists.txt" || die
+	cmake-utils_src_prepare
 }

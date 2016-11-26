@@ -39,9 +39,13 @@ S="${WORKDIR}"
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
+
 	# Disable apt package manager dependency #
-	sed -i 's:add_subdirectory(system-update)::g' \
+	sed -e 's:add_subdirectory(system-update)::g' \
 		-i plugins/CMakeLists.txt \
 		-i tests/plugins/CMakeLists.txt
+	sed -e 's:add_subdirectory(Update)::g' \
+		-i tests/mocks/Ubuntu/SystemSettings/CMakeLists.txt
+
 	cmake-utils_src_prepare
 }

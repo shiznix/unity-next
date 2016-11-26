@@ -31,7 +31,7 @@ DEPEND="${RDEPEND}
 	x11-libs/gsettings-qt
 	x11-libs/libnotify"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
 #export PATH="/usr/$(get_libdir)/qt5/bin:${PATH}"	# Need to see QT5's qmake
 export QT_SELECT=5
 
@@ -39,11 +39,11 @@ src_prepare() {
 	ubuntu-versionator_src_prepare
 	# Don't build tests as they fail to compile #
 	sed -i '/add_subdirectory(tests)/d' "${S}/CMakeLists.txt" || die
+	cmake-utils_src_prepare
 }
 
 src_configure() {
-	local mycmakeargs="${mycmakeargs}
-		-DCMAKE_INSTALL_LOCALSTATEDIR=/var"
+	mycmakeargs+=(-DCMAKE_INSTALL_LOCALSTATEDIR=/var)
 	cmake-utils_src_configure
 }
 

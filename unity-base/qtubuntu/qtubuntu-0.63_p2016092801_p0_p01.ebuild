@@ -37,5 +37,4 @@ QT5_BUILD_DIR="${S}"
 src_prepare() {
 	ubuntu-versionator_src_prepare
 	qt5-build_src_prepare
-	export PATH="${QT5_BINDIR}:${PATH}"
 }

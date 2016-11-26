@@ -35,11 +35,11 @@ DEPEND="app-i18n/anthy
 
 S="${WORKDIR}"
 QT5_BUILD_DIR="${S}"
+export QT_SELECT=5
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
 	qt5-build_src_prepare
-	export PATH="${QT5_BINDIR}:${PATH}"
 }
 
 pkg_preinst() {

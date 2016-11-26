@@ -29,10 +29,10 @@ DEPEND="dev-libs/glib:2
 	dev-qt/qtwidgets:5
 	test? ( dev-util/dbus-test-runner )"
 
-S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
+S="${WORKDIR}"
+export QT_SELECT=5
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
 	qt5-build_src_prepare
-	export PATH="${QT5_BINDIR}:${PATH}"
 }
