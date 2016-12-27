@@ -5,7 +5,7 @@
 EAPI=6
 
 URELEASE="yakkety"
-inherit cmake-utils gnome2-utils ubuntu-versionator
+inherit cmake-utils gnome2-utils ubuntu-versionator user
 
 UURL="mirror://ubuntu/pool/main/libu/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -35,6 +35,11 @@ S="${WORKDIR}"
 
 pkg_preinst() {
 	gnome2_schemas_savelist
+
+	enewgroup usermetrics || die "problem adding 'usermetrics' group"
+	enewuser usermetrics -1 -1 /var/lib/usermetrics "usermetrics" || die "problem adding 'usermetrics' user"
+	keepdir /var/lib/usermetrics
+	fowners usermetrics:usermetrics /var/lib/usermetrics
 }
 
 pkg_postinst() {
