@@ -24,6 +24,7 @@ DEPEND="mir-base/qtmir
 	mir-base/unity-system-compositor
 	net-misc/url-dispatcher
 	sys-apps/ubuntu-app-launch
+	sys-auth/biometryd
 	unity-base/qtubuntu
 	unity-base/unity8
 	unity-scopes/unity-scope-click"
@@ -32,7 +33,5 @@ S="${WORKDIR}"
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
-	sed -e '/export QT_QPA_PLATFORM/a unset QT_QPA_PLATFORMTHEME   # appmenu-qt5 tries to load gtk2 libs thus breaking Mir display' \
-		-i data/lightdm-unity8-session
 	eautoreconf
 }

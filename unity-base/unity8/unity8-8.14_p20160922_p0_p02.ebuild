@@ -18,7 +18,7 @@ SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="+debug test"
 RESTRICT="mirror"
 
 RDEPEND="sys-auth/polkit-pkla-compat
@@ -82,7 +82,9 @@ src_prepare() {
 }
 
 src_configure() {
-	mycmakeargs+=(-DCMAKE_INSTALL_LOCALSTATEDIR=/var)
+	use test || mycmakeargs+=(-DNO_TESTS=ON)
+	mycmakeargs+=(-DCMAKE_INSTALL_LOCALSTATEDIR=/var
+			-DCMAKE_BUILD_TYPE="$(usex debug debug)")
 	cmake-utils_src_configure
 }
 
@@ -95,6 +97,9 @@ src_install() {
 	insinto /usr/share/upstart/sessions
 	doins data/unity8{,-dash,-filewatcher}.conf
 
+	insinto /etc/ubuntu
+	doins data/devices.conf
+
 	find "${ED}" -name "*.pkla" -exec chown root:polkitd {} \;
 
 	# Remove all installed language files as they can be incomplete #
@@ -103,7 +108,15 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog
 	elog "To run Unity8, open an xterm on your desktop and run '/usr/bin/unity8_run.sh'"
-	elog
+	gnome2_schemas_update
+	ubuntu-versionator_pkg_postinst
+}
+
+pkg_preinst() {
+	gnome2_schemas_savelist
+}
+
+pkg_postrm() {
+	gnome2_schemas_update
 }

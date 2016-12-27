@@ -5,7 +5,7 @@
 EAPI=6
 
 URELEASE="yakkety"
-inherit cmake-utils ubuntu-versionator
+inherit cmake-utils gnome2-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/q/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -17,7 +17,7 @@ SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
+IUSE="+debug test"
 RESTRICT="mirror"
 
 DEPEND="app-admin/cgmanager
@@ -44,6 +44,21 @@ S="${WORKDIR}"
 export QT_SELECT=5
 
 src_configure() {
-	mycmakeargs+=(-DNO_TESTS=true)
+	use test || mycmakeargs+=(-DNO_TESTS=ON)
+	mycmakeargs+=(-DUSE_OPENGLES=1
+			-DCMAKE_BUILD_TYPE="$(usex debug debug)")
 	cmake-utils_src_configure
+}
+
+pkg_preinst() {
+	gnome2_schemas_savelist
+}
+
+pkg_postinst() {
+	gnome2_schemas_update
+	ubuntu-versionator_pkg_postinst
+}
+
+pkg_postrm() {
+	gnome2_schemas_update
 }
