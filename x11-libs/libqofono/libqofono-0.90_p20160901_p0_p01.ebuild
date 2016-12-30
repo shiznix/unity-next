@@ -5,7 +5,7 @@
 EAPI=6
 
 URELEASE="yakkety"
-inherit qt5-build ubuntu-versionator
+inherit qmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/libq/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -25,15 +25,22 @@ DEPEND="dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5
 	dev-qt/qtdbus:5
 	dev-qt/qtxmlpatterns:5
-	net-misc/ofono"
+	net-misc/ofono
+	test? ( dev-qt/qttest:5 )"
 
 S="${WORKDIR}"
-export QT_SELECT=5
 
 src_prepare() {
 	ubuntu-versionator_src_prepare
 	use test || \
 		sed -e 's:test$::g' \
 			-i libqofono.pro || die
-	qt5-build_src_prepare
+}
+
+src_configure() {
+	eqmake5
+}
+
+src_install() {
+	emake INSTALL_ROOT="${ED}" install
 }

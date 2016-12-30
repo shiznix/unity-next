@@ -5,7 +5,7 @@
 EAPI=6
 
 URELEASE="yakkety"
-inherit qt5-build ubuntu-versionator
+inherit qmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/universe/m/${PN}"
 UVER_PREFIX="+git20151118+62bd54b"
@@ -18,18 +18,28 @@ SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="+debug doc test wayland"
 RESTRICT="mirror"
 
 DEPEND="dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtdeclarative:5
-	dev-qt/qtgui:5"
+	dev-qt/qtgui:5
+	test? ( dev-qt/qttest:5 )"
 
 S="${WORKDIR}/${PN}-${PV}${UVER_PREFIX}"
-export QT_SELECT=5
 
-src_prepare() {
-	ubuntu-versionator_src_prepare
-	qt5-build_src_prepare
+src_configure() {
+	export ENABLE_MULTITOUCH="false"
+	export MALIIT_SERVER_ARGUMENTS="-software -bypass-wm-hint"
+	export MALIIT_DEFAULT_PLUGIN="libmaliit-keyboard-plugin.so"
+	eqmake5 CONFIG+="qt5-inputcontext enable-dbus-activation glib warn_off" \
+		CONFIG+=$(usex debug debug) \
+		CONFIG+=$(usex doc '' nodoc) \
+		CONFIG+=$(usex test '' notests) \
+		CONFIG+=$(usex wayland wayland)
+}
+
+src_install() {
+	emake INSTALL_ROOT="${ED}" install
 }

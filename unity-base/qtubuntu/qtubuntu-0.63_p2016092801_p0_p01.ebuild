@@ -5,7 +5,7 @@
 EAPI=6
 
 URELEASE="yakkety"
-inherit qt5-build gnome2-utils ubuntu-versionator
+inherit gnome2-utils qmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/q/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -32,9 +32,11 @@ DEPEND="dev-libs/glib:2
 	mir-base/platform-api"
 
 S="${WORKDIR}"
-QT5_BUILD_DIR="${S}"
 
-src_prepare() {
-	ubuntu-versionator_src_prepare
-	qt5-build_src_prepare
+src_configure() {
+	eqmake5
+}
+
+src_install() {
+	emake INSTALL_ROOT="${ED}" install
 }

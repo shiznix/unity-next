@@ -5,7 +5,7 @@
 EAPI=6
 
 URELEASE="yakkety"
-inherit qt5-build cmake-utils ubuntu-versionator
+inherit cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/q/${PN}"
 UVER_PREFIX="+16.04.${PVR_MICRO}"
@@ -25,14 +25,9 @@ DEPEND="dev-libs/glib:2
 	dev-qt/qtdeclarative:5
 	dev-qt/qtdbus:5
 	dev-qt/qtnetwork:5
-	dev-qt/qttest:5
 	dev-qt/qtwidgets:5
-	test? ( dev-util/dbus-test-runner )"
+	test? ( dev-qt/qttest:5
+		dev-util/dbus-test-runner )"
 
 S="${WORKDIR}"
 export QT_SELECT=5
-
-src_prepare() {
-	ubuntu-versionator_src_prepare
-	qt5-build_src_prepare
-}

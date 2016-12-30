@@ -5,7 +5,7 @@
 EAPI=6
 
 URELEASE="yakkety"
-inherit qt5-build gnome2-utils ubuntu-versionator
+inherit gnome2-utils qmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -17,12 +17,13 @@ SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="doc test"
 RESTRICT="mirror"
 
 DEPEND="app-i18n/anthy
 	app-i18n/libpinyin
 	app-i18n/maliit-framework
+	app-text/hunspell
 	app-text/presage
 	dev-libs/libchewing
 	dev-qt/qtcore:5
@@ -31,15 +32,17 @@ DEPEND="app-i18n/anthy
 	dev-qt/qtgui:5
 	mir-base/mir:=
 	mir-base/platform-api
-	x11-libs/ubuntu-ui-toolkit"
+	x11-libs/ubuntu-ui-toolkit
+	test? ( dev-qt/qttest:5 )"
 
 S="${WORKDIR}"
-QT5_BUILD_DIR="${S}"
-export QT_SELECT=5
 
-src_prepare() {
-	ubuntu-versionator_src_prepare
-	qt5-build_src_prepare
+src_configure() {
+	eqmake5 CONFIG+=$(usex test '' notests)
+}
+
+src_install() {
+	emake INSTALL_ROOT="${ED}" install
 }
 
 pkg_preinst() {

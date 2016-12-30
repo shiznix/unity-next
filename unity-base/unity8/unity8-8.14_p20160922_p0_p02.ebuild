@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
 URELEASE="yakkety"
-inherit gnome2-utils qt5-build cmake-utils ubuntu-versionator
+inherit gnome2-utils cmake-utils ubuntu-versionator
 
 UURL="mirror://ubuntu/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -38,7 +38,6 @@ DEPEND="${RDEPEND}
 	dev-libs/libusermetrics
 	dev-perl/JSON
 	dev-python/setuptools
-	dev-qt/qt-mobility
 	dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5[xml]
 	dev-qt/qtxmlpatterns:5
@@ -63,7 +62,6 @@ DEPEND="${RDEPEND}
 	x11-libs/ubuntu-ui-toolkit"
 
 S="${WORKDIR}"
-export QT_SELECT=5
 
 pkg_setup() {
 	ubuntu-versionator_pkg_setup
@@ -77,7 +75,6 @@ src_prepare() {
 	sed '/${CMAKE_CURRENT_BINARY_DIR}\/version/d' \
 		-i data/CMakeLists.txt
 
-	qt5-build_src_prepare
 	cmake-utils_src_prepare
 }
 

@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python3_4 )
 
 URELEASE="yakkety"
-inherit python-single-r1 qt5-build ubuntu-versionator
+inherit python-single-r1 qmake-utils ubuntu-versionator
 
 UURL="mirror://unity/pool/main/u/${PN}"
 UVER_PREFIX="+${UVER_RELEASE}.${PVR_MICRO}"
@@ -18,7 +18,7 @@ SRC_URI="${UURL}/${MY_P}${UVER_PREFIX}.orig.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="test"
 RESTRICT="mirror"
 
 DEPEND="dev-libs/glib:2
@@ -36,13 +36,11 @@ DEPEND="dev-libs/glib:2
 	unity-base/ubuntu-system-settings
 	x11-libs/libaccounts-qt
 	x11-libs/libnotify
-	x11-libs/ubuntu-ui-toolkit"
+	x11-libs/ubuntu-ui-toolkit
+	test? ( dev-qt/qttest:5 )"
 
 S="${WORKDIR}"
 MAKEOPTS="${MAKEOPTS} -j1"
-
-QT5_BUILD_DIR="${S}"
-export QT_SELECT=5
 
 pkg_setup() {
 	ubuntu-versionator_pkg_setup
@@ -53,5 +51,15 @@ src_prepare() {
 	ubuntu-versionator_src_prepare
 	sed -e "s:lib/python3/dist-packages:lib/${EPYTHON}/dist-packages:g" \
 		-i "tests/autopilot/autopilot.pro"
-	qt5-build_src_prepare
+	use test || \
+		sed -e '/tests/d' \
+			-i ubuntu-system-settings-online-accounts.pro
+}
+
+src_configure() {
+	eqmake5
+}
+
+src_install() {
+	emake INSTALL_ROOT="${ED}" install
 }
